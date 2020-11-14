@@ -1,0 +1,11 @@
+<p>register works!</p>
+<form action="" (ngSubmit)="doSingUp()"  [formGroup]="formRegister">
+    <div>
+        <input type="text" formControlName="email">
+    </div>
+    <div>
+        <input type="password" formControlName="password">
+    </div>
+
+    <button type="submit">Sing Up</button>
+</form>
