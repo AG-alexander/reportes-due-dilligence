@@ -11,17 +11,29 @@ import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
+
+import {
+  HomeComponent, 
+  LoginComponent, 
+  RegisterComponent, 
+  SidebarComponent, 
+  ClientesComponent,
+  MantclienteComponent
+} from './componentes/componentes';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent,
+    ClientesComponent,
+    MantclienteComponent
   ],
   imports: [
     BrowserModule,
