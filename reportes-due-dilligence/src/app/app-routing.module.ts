@@ -8,6 +8,8 @@ import {
   ClientesComponent,
   MantclienteComponent
   } from './componentes/componentes';
+import { ManttramiteComponent } from './componentes/manttramite/manttramite.component';
+import { TramitesComponent } from './componentes/tramites/tramites.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cliente', component: ClientesComponent },
   { path: 'mantcliente/:id', component: MantclienteComponent },
+  { path: 'tramite', component: TramitesComponent },
+  { path: 'manttramite/:id', component: ManttramiteComponent },
   { path: '**', component: LoginComponent },
 ];
 

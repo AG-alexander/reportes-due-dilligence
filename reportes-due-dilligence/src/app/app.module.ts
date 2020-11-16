@@ -24,6 +24,8 @@ import {
   ClientesComponent,
   MantclienteComponent
 } from './componentes/componentes';
+import { TramitesComponent } from './componentes/tramites/tramites.component';
+import { ManttramiteComponent } from './componentes/manttramite/manttramite.component';
 
 
 
@@ -36,7 +38,9 @@ import {
     HomeComponent,
     SidebarComponent,
     ClientesComponent,
-    MantclienteComponent
+    MantclienteComponent,
+    TramitesComponent,
+    ManttramiteComponent
   ],
   imports: [
     BrowserModule,
