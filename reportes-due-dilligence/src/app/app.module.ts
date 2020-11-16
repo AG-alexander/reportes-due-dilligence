@@ -11,7 +11,10 @@ import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 import { ReactiveFormsModule } from "@angular/forms";
+
+import {NgbModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   HomeComponent, 
@@ -41,7 +44,10 @@ import {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    ReactiveFormsModule
+    AngularFireStorageModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgbModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
