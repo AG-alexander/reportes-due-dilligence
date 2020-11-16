@@ -5,7 +5,7 @@ export interface Cliente {
     id?: string;
     nombre: string;
     tipo: number;
-    identidficacion: string;
+    identificacion: string;
     contactos: Contacto[];
     //propiedades: Propiedad[];
 }

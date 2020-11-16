@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {Cliente} from './../../models/modelos';
+import { Cliente } from './../../models/modelos';
+import { ClienteService } from "../../services/services";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class ClientesComponent implements OnInit {
 
   constructor(
     private fB: FormBuilder,
+    private clienteService: ClienteService,
     private router: Router) { 
    }
 
@@ -27,14 +29,20 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`mantcliente/${id}`]);
   }
 
-  EliminarCliente(id:number){
-
+  deleteCliente(id: string) {
+    this.clienteService.deleteClientes(id);
   }
 
 
   fiillist(){
 
-    var cliente1:Cliente = { 
+    this.clienteService.getClientes().subscribe(
+      res => {
+        this.listaClientes = res;
+      }
+    );
+
+    /*var cliente1:Cliente = { 
       nombre: "Alan",
       tipo: 1,
       identidficacion: "112940144",
@@ -50,7 +58,7 @@ export class ClientesComponent implements OnInit {
       id: "2",
       contactos:[]                      
     }
-    this.listaClientes.push(cliente2)
+    this.listaClientes.push(cliente2)*/
   }
 }
 

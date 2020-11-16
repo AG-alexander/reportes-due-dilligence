@@ -17,7 +17,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">nombre</th>
-                <th scope="col">identidficacion</th>
+                <th scope="col">identificacion</th>
                 <th scope="col">tipo</th>
                 <th scope="col">opciones</th>
               </tr>
@@ -26,11 +26,11 @@
               <tr *ngFor="let cliente of listaClientes;">
                 <th scope="row">{{cliente.id}}</th>
                 <td>{{cliente.nombre}}</td>
-                <td>{{cliente.identidficacion}}</td>
+                <td>{{cliente.identificacion}}</td>
                 <td>{{cliente.tipo}}</td>
                 <td>
                     <button class="btn btn-warning" (click)="ModificarCrearNuevoCliente(cliente.id)" style="margin: 3px;" >Edit</button>
-                    <button class="btn btn-danger"  (click)="ModificarCrearNuevoCliente(cliente.id)" style="margin: 3px;">Del </button>
+                    <button class="btn btn-danger"  (click)="deleteCliente(cliente.id)" style="margin: 3px;">Del </button>
                 </td>
               </tr>
             </tbody>    

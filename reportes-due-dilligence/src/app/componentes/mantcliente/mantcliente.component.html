@@ -1,1 +1,76 @@
-<p>mantcliente works!</p>
+<app-sidebar></app-sidebar>
+<div class="container">
+    <form action="" [formGroup]="formCliente" (ngSubmit)="saveCliente()">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" id="nombre">
+        </div>
+        <div class="form-group">
+            <label for="tipo">Tipo de persona</label>
+           <select class="form-control" formControlName="tipo" id="tipo">
+               <option value="Persona Fisica">Persona Fisica</option>
+               <option value="Persona Juridica">Persona Juridica
+               </option>
+           </select>
+        </div>
+        <div class="form-group">
+            <label for="identificacion">Identificacion</label>
+            <input type="text" class="form-control" formControlName="identificacion" id="identificacion">
+        </div>
+        <div class="person-information-container">
+            <label>Contacto</label>
+            <button type="button" class="btn btn-primary" (click)="open(contactModal)">Agregar
+                Contacto</button>
+            <div>
+                <ul class="list-group" *ngIf="!contactos.errors">
+                    <li class="list-group-item d-flex justify-content-between"
+                        *ngFor="let contacto of contactos.value; let index = index">
+                        {{contacto.contacto}}
+                        <span>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#contactModal" (click)="setEditContact(index, contactModal)"
+                                placement="left" ngbTooltip="Delete Contact">
+                                Editar
+                            </button>
+                            <button type="button" class="btn btn-danger" (click)="deleteContact(index)"
+                                placement="left" ngbTooltip="Delete Contact">
+                               Eliminar
+                            </button>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="contactos.errors">
+                <div *ngIf="!contactos.errors.validateList">
+                    <p class="invalid-feedback">Faltan Contacton</p>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="formCliente.invalid"
+                            data-dismiss="modal">Guardar</button>
+    </form>
+    <ng-template #contactModal let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">Mantenimiento de Contacto</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form action="" class="form" [formGroup]="formContacto" (ngSubmit)="saveContact(modal)">
+                  <div class="form-group">
+                      <input type="text" class="form-control" formControlName="contactoDescription" [ngClass]="{
+                          'is-invalid':contactoDescription.invalid,
+                          'is-valid':contactoDescription.valid}">
+                      <div class="invalid-feedback" *ngIf="contactoDescription.invalid">
+                          Contacto requerido
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" [disabled]="formContacto.invalid"
+                          data-dismiss="modal">Guardar</button>
+                  </div>
+              </form>
+          </div>
+      </ng-template>
+</div>
