@@ -24,7 +24,7 @@ export class TramambientalComponent implements OnInit {
       especieAnimal: ['', Validators.required],
       especieVegetal: ['', Validators.required],
       obserLimitrofes: ['', Validators.required],
-      estado: ['', Validators.required],
+      estado: [false, Validators.required],
     });
   }
 
