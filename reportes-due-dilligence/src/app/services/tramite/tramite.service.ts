@@ -68,7 +68,7 @@ export class TramiteService {
     }
   }
 
-  saveTramiteInfo(id: string, data) {
+  saveInvestigacionInfo(id: string, campo: string, data) {
     if (id != "0") {
       //this.blockUI.start("Guardando cambios");
   
