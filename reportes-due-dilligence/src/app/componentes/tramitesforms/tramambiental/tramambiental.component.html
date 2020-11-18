@@ -1,1 +1,22 @@
 <p>tramambiental works!</p>
+<p>topografico works!</p>
+<div class="container">
+    <div>
+        <h2>Estudio topografico</h2>
+        <form action="" [formGroup]="formAmbiental" (ngSubmit)="saveAmbiental()">
+            <div class="form-group">
+                <label for="especieAnimal">Especies animales protegidas en el àrea</label>
+                <textarea class="form-control" formControlName="especieAnimal" id="especieAnimal"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="especieVegetal">Especies vegetales protegidas en el àrea</label>
+                <textarea class="form-control" formControlName="especieVegetal" id="especieVegetal"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="obserLimitrofes">Observaciones limitrofes de la propiedad</label>
+                <textarea class="form-control" formControlName="obserLimitrofes" id="obserLimitrofes"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="formAmbiental.invalid">Guardar</button>
+        </form>
+    </div>
+</div>
