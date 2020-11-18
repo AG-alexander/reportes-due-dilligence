@@ -23,7 +23,8 @@ export class TramambientalComponent implements OnInit {
     this.formAmbiental = this.fB.group({
       especieAnimal: ['', Validators.required],
       especieVegetal: ['', Validators.required],
-      obserLimitrofes: ['', Validators.required]
+      obserLimitrofes: ['', Validators.required],
+      estado: ['', Validators.required],
     });
   }
 
