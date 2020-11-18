@@ -67,4 +67,23 @@ export class TramiteService {
       });
     }
   }
+
+  saveTramiteInfo(id: string, data) {
+    if (id != "0") {
+      //this.blockUI.start("Guardando cambios");
+  
+        this.angularFirestore.collection<Tramite>('tramite').doc(id).update(data).then(()=>{
+        //this.blockUI.stop();
+  
+          //this.alertas.successInfoAlert("Actualización exitosa");
+          this.location.back();
+        }).catch((err)=>{
+        //this.blockUI.stop();
+        
+          //this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+          this.location.back();
+        });
+       
+    }
+  }
 }

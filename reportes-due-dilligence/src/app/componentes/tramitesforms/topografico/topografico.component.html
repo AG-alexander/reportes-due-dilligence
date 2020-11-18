@@ -1,1 +1,29 @@
 <p>topografico works!</p>
+<div class="container">
+    <div>
+        <h2>Estudio topografico</h2>
+        <form action="" [formGroup]="formTopografico" (ngSubmit)="saveTopografico()">
+            <div class="form-group">
+                <label for="tipoSuelo">Tipo de suelo</label>
+                <textarea class="form-control" formControlName="tipoSuelo" id="tipoSuelo"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="locacion">Locacion de la propiedad</label>
+                <input type="text" class="form-control" formControlName="locacion" id="locacion">
+            </div>
+            <div class="form-group">
+                <label for="altura">Altura de la propiedad respecto a la altura del mar</label>
+                <input type="text" class="form-control" formControlName="altura" id="altura">
+            </div>
+            <div class="form-group">
+                <label for="coordenadas">Coordenadas geograficas de la propiedad</label>
+                <input type="text" class="form-control" formControlName="coordenadas" id="coordenadas">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
+                <label for="estado" class="form-check-label">Estado del estudio</label>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="formTopografico.invalid">Guardar</button>
+        </form>
+    </div>
+</div>
