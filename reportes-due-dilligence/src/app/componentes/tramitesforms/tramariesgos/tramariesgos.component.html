@@ -1,1 +1,21 @@
 <p>tramariesgos works!</p>
+<div class="container">
+    <div>
+        <h2>Estudio topografico</h2>
+        <form action="" [formGroup]="formRiesgos" (ngSubmit)="saveRiesgos()">
+            <div class="form-group">
+                <label for="obserZona">Observacion de la zona</label>
+                <textarea class="form-control" formControlName="obserZona" id="obserZona"></textarea>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" formControlName="zonaRiesgo" id="zonaRiesgo">
+                <label for="zonaRiesgo" class="form-check-label">Zona de riesgo</label>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
+                <label for="estado" class="form-check-label">Estado del estudio</label>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="formAmbiental.invalid">Guardar</button>
+        </form>
+    </div>
+</div>
