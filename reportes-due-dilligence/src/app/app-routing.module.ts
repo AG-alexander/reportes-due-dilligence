@@ -6,10 +6,17 @@ import {
   LoginComponent, 
   RegisterComponent,
   ClientesComponent,
-  MantclienteComponent
+  MantclienteComponent,
+  TramitesComponent,
+  ManttramiteComponent,
+  InvestigacionComponent,
+  MantinvestigacionComponent,
+  TopograficoComponent,
+  TramambientalComponent,
+  TramariesgosComponent,
+  TramlegalComponent,
+  TributarioComponent
   } from './componentes/componentes';
-import { ManttramiteComponent } from './componentes/manttramite/manttramite.component';
-import { TramitesComponent } from './componentes/tramites/tramites.component';
 
 
 const routes: Routes = [
@@ -19,7 +26,14 @@ const routes: Routes = [
   { path: 'cliente', component: ClientesComponent },
   { path: 'mantcliente/:id', component: MantclienteComponent },
   { path: 'tramite', component: TramitesComponent },
+  { path: 'investigacion', component: InvestigacionComponent },
   { path: 'manttramite/:id', component: ManttramiteComponent },
+  { path: 'mantinvestigacion/:id', component: MantinvestigacionComponent },
+  { path: 'tramiteTopografico/:trabajoId', component: TopograficoComponent },
+  { path: 'tramiteambiental/:id', component: TramambientalComponent },
+  { path: 'tramiteriesgos/:id', component: TramariesgosComponent},
+  { path: 'tramitelegal/:id', component:  TramlegalComponent},
+  { path: 'tramiteTributario/:id', component: TributarioComponent },
   { path: '**', component: LoginComponent },
 ];
 

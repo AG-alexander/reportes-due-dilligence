@@ -3,4 +3,5 @@ export interface Tramite {
     idCliente?: string;
     nombre: string;
     costo: number;
+    estado: boolean;
 }

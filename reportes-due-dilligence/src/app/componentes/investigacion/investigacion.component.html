@@ -1,0 +1,60 @@
+<app-sidebar></app-sidebar>
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-9"> 
+        <h1>Mantenimiento de Investigaciones</h1>
+    </div>
+    <div class="col-sm-1">
+        <button class="btn btn-primary" (click)="ModificarCrearNuevoTrabajo(0)"> Nuevo </button>
+    </div>
+    <div class="col-sm-1"> </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-10"> 
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">trabajo</th>
+                <th scope="col">nombre</th>
+                <th scope="col">cliente</th>
+                <th scope="col">costo</th>
+                <th scope="col">tramites</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invest of listaInvest;">
+                <th scope="row">{{invest.id}}</th>
+                <td>{{invest.numeroDeTrabajo}}</td>
+                <td>{{invest.nombre}}</td>
+                <td>{{invest.idCliente}}</td>
+                <td>{{invest.Total}}</td>
+                <td *ngFor="let tram of invest.tramites;">
+                  <div *ngIf="tram.nombre == 'Estudio Ambiental'">
+                      <a routerLink="/tramiteambiental/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                  </div>
+                  <div *ngIf="tram.nombre == 'Estudio de Riesgos'">
+                    <a routerLink="/tramiteriesgos/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                  </div>
+                  <div *ngIf="tram.nombre == 'Estudio Tributario'">
+                    <a routerLink="/tramiteTributario/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                  </div>
+                  <div *ngIf="tram.nombre == 'Estudio legal'">
+                    <a routerLink="/tramitelegal/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                  </div>
+                  <div *ngIf="tram.nombre == 'Estudio Topografico'">
+                    <a routerLink="/tramiteTopografico/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                  </div> 
+                </td>
+                <td>
+                    <button class="btn btn-warning" style="margin: 3px;" >Edit</button>
+                    <button class="btn btn-danger"  style="margin: 3px;">Del </button>
+                </td>
+              </tr>
+            </tbody>    
+          </table>
+    </div>
+    <div class="col-sm-1"> </div>
+</div>
