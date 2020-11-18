@@ -27,6 +27,8 @@ export class TramambientalComponent implements OnInit {
     });
   }
 
+  saveAmbiental() {}
+
   ngOnInit(): void {
   }
 
