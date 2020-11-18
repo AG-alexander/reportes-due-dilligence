@@ -22,12 +22,17 @@ import {
   RegisterComponent, 
   SidebarComponent, 
   ClientesComponent,
-  MantclienteComponent
+  MantclienteComponent,
+  InvestigacionComponent,
+  TramitesComponent,
+  ManttramiteComponent,
+  MantinvestigacionComponent,
+  TopograficoComponent,
+  TramambientalComponent,
+  TramariesgosComponent,
+  TramlegalComponent,
+  TributarioComponent
 } from './componentes/componentes';
-import { TramitesComponent } from './componentes/tramites/tramites.component';
-import { ManttramiteComponent } from './componentes/manttramite/manttramite.component';
-
-
 
 
 @NgModule({
@@ -40,7 +45,14 @@ import { ManttramiteComponent } from './componentes/manttramite/manttramite.comp
     ClientesComponent,
     MantclienteComponent,
     TramitesComponent,
-    ManttramiteComponent
+    ManttramiteComponent,
+    InvestigacionComponent,
+    MantinvestigacionComponent,
+    TramambientalComponent,
+    TramariesgosComponent,
+    TramlegalComponent,
+    TributarioComponent,
+    TopograficoComponent
   ],
   imports: [
     BrowserModule,

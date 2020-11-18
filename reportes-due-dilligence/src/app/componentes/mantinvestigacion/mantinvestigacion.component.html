@@ -1,0 +1,6 @@
+<app-sidebar></app-sidebar>
+<td *ngFor="let tram of listaTramites;"></td>
+<div class="form-check" *ngFor="let tram of listaTramites;" >
+    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (click)="onChange($event, tram.id)"> 
+    <label>{{tram.nombre}} </label>
+</div>

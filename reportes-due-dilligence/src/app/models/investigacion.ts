@@ -14,4 +14,5 @@ export interface Investigacioin {
     porcentajeDeProgreso: number;
     fechaCreacion: Date;
     Estado: string;
+    Total: number;
 }
