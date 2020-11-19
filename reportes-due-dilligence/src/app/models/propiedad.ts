@@ -4,6 +4,4 @@ export interface Propiedad {
     direccionPropiedad: string;
     tamanno: number;
     tipoLocacion: string;
-    planos: boolean;
-
 }

@@ -10,7 +10,6 @@ export interface Investigacioin {
     tramites: Tramite[];
     propiedades: Propiedad[];
     observaciones: string;
-    numeroDeTrabajo: number;
     porcentajeDeProgreso: number;
     fechaCreacion: Date;
     Estado: string;

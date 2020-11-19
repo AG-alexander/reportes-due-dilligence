@@ -1,6 +1,54 @@
 <app-sidebar></app-sidebar>
-<td *ngFor="let tram of listaTramites;"></td>
-<div class="form-check" *ngFor="let tram of listaTramites;" >
-    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (click)="onChange($event, tram.id)"> 
-    <label>{{tram.nombre}} </label>
+
+<div style="margin-left: 20px; margin-right: 20px;">
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label for="cedulaClientes">Cedula</label>
+            <input 
+              id="cedulaCliente" 
+              [(ngModel)]="cedulaClientes" 
+              type="text" 
+              class="form-control" 
+              placeholder="Introducir cedula" >
+            <button class="btn btn-outline-secondary" type="button" (click)="buscarCliente()">Buscar</button>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="nombreCliente">Cliente</label>
+            <input 
+              id="nombreCliente" 
+              [(ngModel)]="nombreClientes" 
+              type="text" 
+              class="form-control" 
+              placeholder="Introducir cedula" 
+              aria-describedby="button-addon2" 
+              disabled>
+        </div>
+    </div>
+    <form [formGroup]="formInvest" (ngSubmit)="guardarInvestigacion()">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombre" >Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="nombre">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="observaciones">observaciones</label>
+          <input type="text" formControlName="observaciones" class="form-control" id="observaciones" placeholder="observaciones">
+        </div> 
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Seleccion de Tramites</h2>
+                </div>
+                <div class="form-check col-md-4" *ngFor="let tram of listaTramites;let i = index;" >
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input form-control" id="switch{{i}}" (click)="onChange($event, tram.id)">
+                            <label class="custom-control-label" for="switch{{i}}">{{tram.nombre}} - {{tram.costo}} Colones</label>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
 </div>
+
