@@ -7,5 +7,5 @@ export interface Cliente {
     tipo: number;
     identificacion: string;
     contactos: Contacto[];
-    //propiedades: Propiedad[];
+    email?: string;
 }

@@ -1,36 +1,31 @@
 import { Injectable } from '@angular/core';
+import { DataStorageService } from '../dataStore/data-store.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { DataStorageService } from "../dataStore/data-store.service";
-import { Cliente } from "../../models/modelos";
+import { Investigacioin } from "../../models/modelos";
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService {
+export class InvestigacionService {
 
-  constructor(
+  constructor( 
     private dataStorage: DataStorageService, 
     private angularFirestore: AngularFirestore,  
-    private location: Location
-  ) { }
-  
-  getClientes(): Observable<Cliente[]> {
-    return this.angularFirestore.collection<Cliente>('cliente').valueChanges();
+    private location: Location) { }
+    
+  getinvestigacioines(): Observable<Investigacioin[]> {
+    return this.angularFirestore.collection<Investigacioin>('investigacioin').valueChanges();
   }
 
-  getClienteById(id: string): Observable<Cliente[]> {
-    return this.angularFirestore.collection<Cliente>('cliente', ref => ref.where('id', '==', id)).valueChanges();
+  getinvestigacioinById(id: string): Observable<Investigacioin[]> {
+    return this.angularFirestore.collection<Investigacioin>('investigacioin', ref => ref.where('id', '==', id)).valueChanges();
   }
 
-  getClienteByIdentification(identificacion: string): Observable<Cliente[]> {
-    return this.angularFirestore.collection<Cliente>('cliente', ref => ref.where('identificacion', '==', identificacion)).valueChanges();
-  }
-
-  deleteClientes(id: string) {
+  deleteinvestigacioin(id: string) {
     //this.blockUI.start("Guardando cambios");
-    this.angularFirestore.collection<Cliente>('cliente').doc(id).delete().then(()=>{
+    this.angularFirestore.collection<Investigacioin>('investigacioin').doc(id).delete().then(()=>{
       //this.alertas.successInfoAlert("Eliminado correctamente");
       //this.blockUI.stop();
     }).catch(()=>{
@@ -39,27 +34,27 @@ export class ClienteService {
     });
   }
 
-  saveCliente(cliente: Cliente) {
-    if (cliente.id) {
+  saveinvestigacioin(investigacioin: Investigacioin) {
+    if (investigacioin.id != "0") {
     //this.blockUI.start("Guardando cambios");
 
-      this.angularFirestore.collection<Cliente>('cliente').doc(cliente.id).update(cliente).then(()=>{
+      this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).update(investigacioin).then(()=>{
       //this.blockUI.stop();
 
         //this.alertas.successInfoAlert("Actualización exitosa");
         this.location.back();
-      }).catch(()=>{
+      }).catch((err)=>{
       //this.blockUI.stop();
-
+      
         //this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
         this.location.back();
       });
      
     } else {
-      cliente.id = this.angularFirestore.createId();
+      investigacioin.id = this.angularFirestore.createId();
     //this.blockUI.start("Guardando cambios");
 
-      this.angularFirestore.collection<Cliente>('cliente').doc(cliente.id).set(cliente).then(()=>{
+      this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).set(investigacioin).then(()=>{
       //this.blockUI.stop();
 
         //this.alertas.successInfoAlert("Inserción exitosa");
@@ -72,5 +67,4 @@ export class ClienteService {
       });
     }
   }
-
 }

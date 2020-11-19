@@ -70,7 +70,7 @@ export class ManttramiteComponent implements OnInit {
     this.tramiteService.getTramiteById(this.iduser.toString()).subscribe(
       res => {
        this.tramite = res[0];
-       this.nombre.setValue(this.tramite.nombre);
+        
        this.costo.setValue(this.tramite.costo);
       }
     );

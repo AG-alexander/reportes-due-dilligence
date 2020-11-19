@@ -33,19 +33,19 @@
                 <td>{{invest.Total}}</td>
                 <td *ngFor="let tram of invest.tramites;">
                   <div *ngIf="tram.nombre == 'Estudio Ambiental'">
-                      <a routerLink="/tramiteambiental/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                      <a routerLink="/tramiteambiental/{{invest.id}}">{{tram.nombre}}</a>
                   </div>
                   <div *ngIf="tram.nombre == 'Estudio de Riesgos'">
-                    <a routerLink="/tramiteriesgos/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                    <a routerLink="/tramiteriesgos/{{invest.id}}">{{tram.nombre}}</a>
                   </div>
                   <div *ngIf="tram.nombre == 'Estudio Tributario'">
-                    <a routerLink="/tramiteTributario/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                    <a routerLink="/tramiteTributario/{{invest.id}}">{{tram.nombre}}</a>
                   </div>
                   <div *ngIf="tram.nombre == 'Estudio legal'">
-                    <a routerLink="/tramitelegal/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                    <a routerLink="/tramitelegal/{{invest.id}}">{{tram.nombre}}</a>
                   </div>
                   <div *ngIf="tram.nombre == 'Estudio Topografico'">
-                    <a routerLink="/tramiteTopografico/{{invest.numeroDeTrabajo}}">{{tram.nombre}}</a>
+                    <a routerLink="/tramiteTopografico/{{invest.id}}">{{tram.nombre}}</a>
                   </div> 
                 </td>
                 <td>
