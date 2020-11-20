@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-9"> 
+        <h1>Mantenimiento de Roles de Usuarios</h1>
+    </div>
+
+    <div class="col-sm-1"> </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"> </div>
+    <div class="col-sm-10"> 
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">correo</th>
+                <th scope="col">admin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of listaUsuario;">
+                <th scope="row">{{usuario.id}}</th>
+                <td>{{usuario.email}}</td>
+                <td>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch2" [checked]="usuario.admin" (click)="updateUser(usuario)">
+                        <label class="custom-control-label" for="customSwitch2">Admin</label>
+                      </div>
+                </td>
+              </tr>
+            </tbody>    
+          </table>
+    </div>
+    <div class="col-sm-1"> </div>
+</div>

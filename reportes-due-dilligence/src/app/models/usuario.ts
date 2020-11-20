@@ -1,5 +1,6 @@
 export interface Usuario {
     id?: string;
-    nombre: string;
+    nombre?: string;
     email: string;
+    admin: boolean;
 }
