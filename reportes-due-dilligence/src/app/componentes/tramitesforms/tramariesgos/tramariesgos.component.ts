@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TramiteService } from 'src/app/services/services';
+import { Investigacioin, Tramite } from 'src/app/models/modelos';
+import { InvestigacionService } from 'src/app/services/services';
 
 @Component({
   selector: 'app-tramariesgos',
@@ -10,27 +11,42 @@ import { TramiteService } from 'src/app/services/services';
 })
 export class TramariesgosComponent implements OnInit {
 
-  iduser: number;
+  idinvest: string;
   formRiesgos: FormGroup;
+  investigacion: Investigacioin;
 
   constructor(
     private fB: FormBuilder,
     private activatedRouete: ActivatedRoute,
-    private tramiteService: TramiteService
+    private invService: InvestigacionService
   ) { }
 
   initForm() {
     this.formRiesgos = this.fB.group({
-      especieAnimal: ['', Validators.required],
-      especieVegetal: ['', Validators.required],
-      obserLimitrofes: ['', Validators.required],
+      obserZona: ['', Validators.required],
+      zonaRiesgo: [false, Validators.required],
       estado: [false, Validators.required],
     });
   }
 
-  saveRiesgos() {}
+  saveRiesgos() {
+    this.investigacion.tramites.forEach(t => {
+      if (t.id == "U70iX62RaEy6tSridUda") {
+        t["estudio"] = this.formRiesgos.value;
+      }
+    })
+    this.invService.saveinvestigacioin(this.investigacion);
+  }
   
   ngOnInit(): void {
+    this.initForm();
+    this.idinvest = this.activatedRouete.snapshot.params['id'];
+    this.invService.getinvestigacioinById(this.idinvest).subscribe(
+      res => {
+        this.investigacion = res[0];
+        console.log(this.investigacion);
+      }
+    );
   }
 
 }
