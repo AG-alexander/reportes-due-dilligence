@@ -35,6 +35,7 @@ import {
   TramlegalComponent,
   TributarioComponent
 } from './componentes/componentes';
+import { AuthComponent } from './componentes/auth/auth/auth.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {
     TramariesgosComponent,
     TramlegalComponent,
     TributarioComponent,
-    TopograficoComponent
+    TopograficoComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

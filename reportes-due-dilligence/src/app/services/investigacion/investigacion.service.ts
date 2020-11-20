@@ -37,50 +37,50 @@ export class InvestigacionService {
   saveinvestigacioin(investigacioin: Investigacioin) {
     if (investigacioin.id != "0") {
     //this.blockUI.start("Guardando cambios");
-
-      this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).update(investigacioin).then(()=>{
-      //this.blockUI.stop();
-
-        //this.alertas.successInfoAlert("Actualización exitosa");
-        this.location.back();
-      }).catch((err)=>{
-      //this.blockUI.stop();
-      
-        //this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
-        this.location.back();
-      });
-     
+    
+    this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).update(investigacioin).then(()=>{
+    //this.blockUI.stop();
+    
+    //this.alertas.successInfoAlert("Actualización exitosa");
+    this.location.back();
+    }).catch((err)=>{
+    //this.blockUI.stop();
+    
+    //this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+    this.location.back();
+    });
+    
     } else {
-      investigacioin.id = this.angularFirestore.createId();
-      investigacioin.propiedades.idCliente= investigacioin.idCliente;
-      investigacioin.propiedades.id = this.angularFirestore.createId();
+    investigacioin.id = this.angularFirestore.createId();
+    investigacioin.propiedades.idCliente= investigacioin.idCliente;
+    investigacioin.propiedades.id = this.angularFirestore.createId();
     //this.blockUI.start("Guardando cambios");
-
-    this.angularFirestore.collection<Investigacioin>('Propiedad').doc(investigacioin.propiedades.id).set(investigacioin.propiedades).then(()=>{
-      //this.blockUI.stop();
-
-        //this.alertas.successInfoAlert("Inserción exitosa");
-        this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).set(investigacioin).then(()=>{
-          //this.blockUI.stop();
     
-            //this.alertas.successInfoAlert("Inserción exitosa");
-            this.location.back();
-          }).catch((err)=>{
-          //this.blockUI.stop();
+    this.angularFirestore.collection<Propiedad>('Propiedad').doc(investigacioin.propiedades.id).set(investigacioin.propiedades).then(()=>{
+    //this.blockUI.stop();
     
-            //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
-            this.location.back();
-          });
-      }).catch((err)=>{
-      //this.blockUI.stop();
-
-        //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
-        this.location.back();
-      });
-
-      
+    //this.alertas.successInfoAlert("Inserción exitosa");
+    this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).set(investigacioin).then(()=>{
+    //this.blockUI.stop();
+    
+    //this.alertas.successInfoAlert("Inserción exitosa");
+    this.location.back();
+    }).catch((err)=>{
+    //this.blockUI.stop();
+    
+    //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+    this.location.back();
+    });
+    }).catch((err)=>{
+    //this.blockUI.stop();
+    
+    //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+    this.location.back();
+    });
+    
+    
     }
-  }
+    }
 
   saveInvestigacionInfo(id: string, campo: string, data) {
     let refInv = this.angularFirestore.collection<Investigacioin>('investigacioin').doc(id);
