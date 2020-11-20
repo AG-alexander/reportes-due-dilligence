@@ -5,8 +5,8 @@ import { InvestigacionService } from "./investigacion/investigacion.service";
 import { PdfService } from "./PDF/pdf.service";
 import { AuthService } from "./auth/auth.service";
 import { UsuarioService } from "./usuario/usuario.service";
-    import { from } from 'rxjs';
-
+import { AlertService} from "./alert/alert.service"
+import { from } from 'rxjs';
 export {
     DataStorageService,
     ClienteService,
@@ -14,5 +14,6 @@ export {
     InvestigacionService,
     PdfService,
     AuthService,
-    UsuarioService
+    UsuarioService,
+    AlertService
 }

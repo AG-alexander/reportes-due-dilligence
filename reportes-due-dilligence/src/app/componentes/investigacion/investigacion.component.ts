@@ -3,6 +3,8 @@ import { from } from 'rxjs';
 import { Router } from '@angular/router';
 import { Investigacioin, Cliente, Tramite } from 'src/app/models/modelos';
 import { TramiteService, InvestigacionService, PdfService } from './../../services/services'
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { AlertService } from './../../services/alert/alert.service';
 
 @Component({
   selector: 'app-investigacion',
@@ -10,6 +12,7 @@ import { TramiteService, InvestigacionService, PdfService } from './../../servic
   styleUrls: ['./investigacion.component.css']
 })
 export class InvestigacionComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   listaInvest:Investigacioin[] = []
   listaTramites:Tramite[] = []
   constructor(
@@ -23,6 +26,7 @@ export class InvestigacionComponent implements OnInit {
   }
 
   getlistTramites(){
+    this.blockUI.start("Cargando Datos");
     this.tramiteService.getTramites().subscribe(
       res => {
         this.listaTramites = res;
@@ -36,10 +40,11 @@ export class InvestigacionComponent implements OnInit {
   }
 
   fiillist(){
-
+    this.blockUI.start("Cargando Datos");
     this.investigacionService.getinvestigacioines().subscribe(
       res => {
         this.listaInvest = res;
+        this.blockUI.stop();
         console.log(this.listaInvest)
       }
     );
@@ -50,6 +55,7 @@ export class InvestigacionComponent implements OnInit {
   }
 
   generarPDF(id: string) {
+    this.blockUI.start("Generando Datos");
     this.investigacionService.getinvestigacioinById(id).subscribe(
       res => {
         console.log(1);

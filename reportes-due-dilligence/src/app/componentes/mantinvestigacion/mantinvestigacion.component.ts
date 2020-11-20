@@ -20,6 +20,7 @@ export class MantinvestigacionComponent implements OnInit {
   listaTramitesSeleionada:Tramite[] =[];
 
   cliente: Cliente;
+  titulo:string ='';
   name: string = '';
   idinvest: string;
   nombreClientes: string = "";
@@ -38,8 +39,13 @@ export class MantinvestigacionComponent implements OnInit {
     this.getlistTramites();
     this.initForm();
     this.idinvest = this.activatedRouete.snapshot.params['id'];
+    
     if(this.idinvest !== "0"){
+      this.titulo = "Modificar investigación"
       this.getInvest(); 
+    }
+    else{
+      this.titulo = "Crear investigación"
     }
   }
 

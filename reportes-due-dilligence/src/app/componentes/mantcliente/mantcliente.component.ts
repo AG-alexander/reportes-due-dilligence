@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente, Contacto } from 'src/app/models/modelos';
@@ -12,13 +13,14 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./mantcliente.component.css']
 })
 export class MantclienteComponent implements OnInit {
-  
-  iduser:number;
+  @BlockUI() blockUI: NgBlockUI;
+  iduser:string;
   formCliente: FormGroup;
   formContacto: FormGroup;
   contactIndex: number;
   closeResult: string;
   cliente: Cliente;
+  titulo:string ='';
 
   constructor(
     private fB: FormBuilder,
@@ -70,52 +72,43 @@ export class MantclienteComponent implements OnInit {
     });
   }
 
-  get nombre() {
-    return this.formCliente.controls["nombre"];
-  }
-  get tipo() {
-    return this.formCliente.controls["tipo"];
-  }
-  get identificacion() {
-    return this.formCliente.controls["identificacion"];
-  }
-  get contactos() {
-    return this.formCliente.controls["contactos"];
-  }
-  get contactoDescription() {
-    return this.formContacto.controls["contactoDescription"];
-  }
-  get email() {
-    return this.formCliente.controls["email"];
+  getFormControl(tipe:string) {
+    return this.formCliente.controls[tipe];
   }
 
+  getContactoControl(tipe:string) {
+    return this.formContacto.controls[tipe];
+  }
+  // get contactoDescription() {
+  //   return this.formContacto.controls["contactoDescription"];
+  // }
   deleteContact(index) {
-    let contactListAux = this.contactos.value as Contacto[];
+    let contactListAux = this.getFormControl('contactos').value as Contacto[];
     contactListAux.splice(index, 1);
-    this.contactos.setValue(contactListAux);
+    this.getFormControl('contactos').setValue(contactListAux);
   }
 
   addContact() {
-    let description = this.contactoDescription.value;
+    let description = this.getContactoControl('contactoDescription').value as string;
 
     let contact: Contacto = {
       contacto: description,
       tipoContacto: ""
     }
 
-    let contactoListAux = this.contactos.value as Contacto[];
+    let contactoListAux =this.getFormControl('contactos').value as Contacto[];
 
     contactoListAux.push(contact);
 
-    this.contactos.setValue(contactoListAux);
+    this.getFormControl('contactos').setValue(contactoListAux);
     this.formContacto.reset();
   }
 
   editContact() {
     if (this.contactIndex >= 0) {
-      let contactoListAux = this.contactos.value as Contacto[];
+      let contactoListAux = this.getFormControl('contactos').value as Contacto[];
 
-      let description = this.contactoDescription.value;
+      let description = this.getContactoControl('contactoDescription').value as string;
 
       let contactoInList = contactoListAux[this.contactIndex];
 
@@ -125,16 +118,16 @@ export class MantclienteComponent implements OnInit {
 
       this.contactIndex = -1;
 
-      this.contactos.setValue(contactoListAux);
+      this.getFormControl('contactos').setValue(contactoListAux);
       this.formContacto.reset();
     }
   }
 
   setEditContact(index, contactModal) {
     this.contactIndex = index;
-    let contactListAux = this.contactos.value as Contacto[];
+    let contactListAux = this.getFormControl('contactos').value as Contacto[];
     let contactData = contactListAux[this.contactIndex];
-    this.contactoDescription.setValue(contactData.contacto);
+    this.getFormControl('contactos').setValue(contactData.contacto);
     this.open(contactModal);
   }
 
@@ -155,14 +148,16 @@ export class MantclienteComponent implements OnInit {
   }
 
   getCliente() {
+    this.blockUI.start("Cargando Datos");
     this.clienteService.getClienteById(this.iduser.toString()).subscribe(
       res => {
        this.cliente = res[0];
-       this.nombre.setValue(this.cliente.nombre);
-       this.tipo.setValue(this.cliente.tipo);
-       this.identificacion.setValue(this.cliente.identificacion);
-       this.contactos.setValue(this.cliente.contactos);
-       this.email.setValue(this.cliente.contactos);
+       this.getFormControl('nombre').setValue(this.cliente.nombre);
+       this.getFormControl('tipo').setValue(this.cliente.tipo);
+       this.getFormControl('identificacion').setValue(this.cliente.identificacion);
+       this.getFormControl('contactos').setValue(this.cliente.contactos);
+       this.getFormControl('email').setValue(this.cliente.email);
+       this.blockUI.stop();
       }
     );
   }
@@ -170,22 +165,18 @@ export class MantclienteComponent implements OnInit {
   ngOnInit(): void {
     this.iduser = this.activatedRouete.snapshot.params['id'];
 
-    if(this.iduser > 0){
-      this.cargarInfo(this.iduser)
+    if(this.iduser === "0"){
       this.initForm();
       this.initContactoForm();
+      this.titulo = "Crear cliente"
     }
     else{
+      this.titulo = "Modificar cliente"
       this.initForm();
       this.initContactoForm();
       this.getCliente();
-      console.log(`vamos a crear un nuevo Id`)
     }
 
-  }
-
-  cargarInfo(id:number){
-    console.log(`Id a editar ${id}`)
   }
 
 }

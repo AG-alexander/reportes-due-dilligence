@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tramite } from 'src/app/models/modelos';
 import { TramiteService } from 'src/app/services/services';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-tramites',
@@ -10,7 +11,7 @@ import { TramiteService } from 'src/app/services/services';
   styleUrls: ['./tramites.component.css']
 })
 export class TramitesComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   fgCliente: FormGroup;
   listaTramites:Tramite[] = []
 
@@ -32,32 +33,14 @@ export class TramitesComponent implements OnInit {
     this.tramiteService.deleteTramites(id);
   }
 
-
   fiillist(){
-
+    this.blockUI.start("Cargando Datos");
     this.tramiteService.getTramites().subscribe(
       res => {
         this.listaTramites = res;
+        this.blockUI.stop();
       }
     );
-
-    /*var cliente1:Cliente = { 
-      nombre: "Alan",
-      tipo: 1,
-      identidficacion: "112940144",
-      id: "1",
-      contactos:[]                      
-    }
-    this.listaClientes.push(cliente1)
-  
-    var cliente2:Cliente = { 
-      nombre: "Alex",
-      tipo: 1,
-      identidficacion: "112450987",
-      id: "2",
-      contactos:[]                      
-    }
-    this.listaClientes.push(cliente2)*/
   }
 
 }
