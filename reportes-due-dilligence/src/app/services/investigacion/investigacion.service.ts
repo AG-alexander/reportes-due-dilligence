@@ -67,4 +67,43 @@ export class InvestigacionService {
       });
     }
   }
+
+  saveInvestigacionInfo(id: string, campo: string, data) {
+    let refInv = this.angularFirestore.collection<Investigacioin>('investigacioin').doc(id);
+debugger
+        console.log(refInv['tramites']);
+    /*if (id != "0") {
+      //this.blockUI.start("Guardando cambios");
+        
+
+        this.angularFirestore.collection<Investigacioin>('investigacioin').doc(id).update().then(()=>{
+        //this.blockUI.stop();
+  
+          //this.alertas.successInfoAlert("Actualización exitosa");
+          this.location.back();
+        }).catch((err)=>{
+        //this.blockUI.stop();
+        
+          //this.alertas.errorInfoAlert("Ha ocurrido un error en la actualización");
+          this.location.back();
+        });
+       
+      } else {
+        id = this.angularFirestore.createId();
+      //this.blockUI.start("Guardando cambios");
+  
+        this.angularFirestore.collection<Investigacioin>('investigacioin').doc(id).set().then(()=>{
+        //this.blockUI.stop();
+  
+          //this.alertas.successInfoAlert("Inserción exitosa");
+          this.location.back();
+        }).catch((err)=>{
+        //this.blockUI.stop();
+  
+          //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+          this.location.back();
+        });
+      }*/
+  }
+
 }

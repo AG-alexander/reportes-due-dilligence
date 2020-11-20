@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import { Router } from '@angular/router';
 import { Investigacioin, Cliente, Tramite } from 'src/app/models/modelos';
-import { TramiteService, InvestigacionService } from './../../services/services'
+import { TramiteService, InvestigacionService, PdfService } from './../../services/services'
 
 @Component({
   selector: 'app-investigacion',
@@ -15,7 +15,8 @@ export class InvestigacionComponent implements OnInit {
   constructor(
     private tramiteService: TramiteService,
     private router: Router,
-    private investigacionService:InvestigacionService){ }
+    private investigacionService:InvestigacionService,
+    private pdfService: PdfService ){ }
 
   ngOnInit(): void {
     this.getlistTramites()
@@ -108,6 +109,21 @@ export class InvestigacionComponent implements OnInit {
       }
       console.log(inves) 
     }
+  }
+
+  generarPDF(id: string) {
+    this.investigacionService.getinvestigacioinById(id).subscribe(
+      res => {
+        console.log(1);
+        this.pdfService.generatePDF(res).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      });
   }
 
 }
