@@ -14,7 +14,6 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 import { ReactiveFormsModule } from "@angular/forms";
-
 import {NgbModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from "@angular/common/http";
