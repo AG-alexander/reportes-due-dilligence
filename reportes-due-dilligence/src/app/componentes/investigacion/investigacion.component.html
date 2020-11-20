@@ -1,17 +1,19 @@
 <app-sidebar></app-sidebar>
-<div class="row">
-    <div class="col-sm-1"> </div>
-    <div class="col-sm-9"> 
+<div style="margin-left: 20px; margin-right: 20px;">
+  <div class="row">
+    <div class="col-sm-11"> 
         <h1>Mantenimiento de Investigaciones</h1>
     </div>
     <div class="col-sm-1">
-        <button class="btn btn-primary" (click)="ModificarCrearNuevoTrabajo(0)"> Nuevo </button>
+      <a (click)="ModificarCrearNuevoTrabajo(0)"  
+                     class="fa fa fa-plus"
+                     ngbPopover="Agregar" 
+                     triggers="mouseenter:mouseleave" 
+                     style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
     </div>
-    <div class="col-sm-1"> </div>
-</div>
-<div class="row">
-    <div class="col-sm-1"> </div>
-    <div class="col-sm-10"> 
+  </div>
+  <div class="row">
+    <div class="col-sm-12"> 
         <table class="table">
             <thead>
               <tr>
@@ -36,35 +38,35 @@
                     <div *ngFor="let tram of invest.tramites;" style="padding-left:10px;">
                       <a *ngIf="tram.nombre == 'Estudio Ambiental'" 
                           routerLink="/tramiteambiental/{{invest.id}}"  
-                          style="font-size: 24px;" 
+                          style="font-size: 32px; color:rgb(80, 197, 226);" 
                           ngbPopover="{{tram.nombre}}" 
                           triggers="mouseenter:mouseleave" 
                           class="fa fa-tree"></a>
   
                       <a *ngIf="tram.nombre == 'Estudio de Riesgos'" 
                           routerLink="/tramiteriesgos/{{invest.id}}" 
-                          style="font-size: 24px;"
+                          style="font-size: 32px; color: rgb(80, 197, 226);"
                           ngbPopover="{{tram.nombre}}" 
                           triggers="mouseenter:mouseleave" 
                           class="fa fa-exclamation-triangle"></a>
                           
                       <a *ngIf="tram.nombre == 'Estudio Tributario'"
                           routerLink="/tramiteTributario/{{invest.id}}" 
-                          style="font-size: 24px;"
+                          style="font-size: 32px; color: rgb(80, 197, 226);"
                           ngbPopover="{{tram.nombre}}" 
                           triggers="mouseenter:mouseleave" 
                           class="fa fa-money"></a>
                           
-                      <a *ngIf="tram.nombre == 'Estudio legal'" 
+                      <p *ngIf="tram.nombre == 'Estudio legal'" 
                           routerLink="/tramitelegal/{{invest.id}}" 
-                          style="font-size: 24px;" 
+                          style="font-size: 32px; color: rgb(80, 197, 226);" 
                           ngbPopover="{{tram.nombre}}" 
                           triggers="mouseenter:mouseleave" 
-                          class="fa fa-gavel" ></a>
+                          class="fa fa-gavel" ></p>
   
                       <a *ngIf="tram.nombre == 'Estudio Topografico'" 
                         routerLink="/tramiteTopografico/{{invest.id}}" 
-                        style="font-size: 24px;" 
+                        style="font-size: 32px; color:  rgb(80, 197, 226);" 
                         ngbPopover="{{tram.nombre}}" 
                         triggers="mouseenter:mouseleave" 
                         class="fa fa-map-marker"></a>
@@ -72,13 +74,27 @@
                   </div>
                 </td>
                 <td>
-                    <button class="btn btn-danger"  style="margin: 3px;" (click)="generarPDF(invest.id)" >PDF </button>
-                    <button class="btn btn-warning" style="margin: 3px;" (click)="ModificarCrearNuevoTrabajo(invest.id)">Edit</button>
-                    <button class="btn btn-danger"  style="margin: 3px;" (click)="DeleteTrabajo(invest.id)">Del </button>
+                  <a (click)="generarPDF(invest.id)"  
+                     class="fa fa-file-pdf-o"
+                     ngbPopover="Enviar PDF" 
+                     triggers="mouseenter:mouseleave" 
+                     style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+
+                  <a  (click)="ModificarCrearNuevoTrabajo(invest.id)"  
+                      class="fa fa-pencil-square-o"
+                      ngbPopover="Editar" 
+                     triggers="mouseenter:mouseleave"  
+                      style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+
+                  <a  (click)="DeleteTrabajo(invest.id)"
+                      class="fa fa-trash-o"
+                      ngbPopover="Eliminar" 
+                      triggers="mouseenter:mouseleave"  
+                      style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
                 </td>
               </tr>
             </tbody>    
           </table>
     </div>
-    <div class="col-sm-1"> </div>
+</div>
 </div>

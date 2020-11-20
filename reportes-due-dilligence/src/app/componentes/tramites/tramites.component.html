@@ -1,37 +1,55 @@
-<app-sidebar></app-sidebar>
-<div class="row">
-    <div class="col-sm-1"> </div>
-    <div class="col-sm-9"> 
-        <h1>Mantenimiento de Tramites</h1>
+<block-ui>
+  <app-sidebar></app-sidebar>
+  <div style="margin-left: 20px; margin-right: 20px;">
+    <div class="row">
+      <div class="col-sm-11"> 
+          <h1>Mantenimiento de Tramites</h1>
+      </div>
+      <div class="col-sm-1">
+        <a (click)="ModificarCrearNuevoTramite(0)"
+                    class="fa fa fa-plus"
+                    ngbPopover="Agregar" 
+                    triggers="mouseenter:mouseleave" 
+                    style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
+      </div>
     </div>
-    <div class="col-sm-1">
-        <button class="btn btn-primary" (click)="ModificarCrearNuevoTramite(0)"> Nuevo </button>
-    </div>
-    <div class="col-sm-1"> </div>
-</div>
-<div class="row">
-    <div class="col-sm-1"> </div>
-    <div class="col-sm-10"> 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">nombre</th>
-                <th scope="col">costo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let tramite of listaTramites;">
-                <th scope="row">{{tramite.id}}</th>
-                <td>{{tramite.nombre}}</td>
-                <td>{{tramite.costo}}</td>
-                <td>
-                    <button class="btn btn-warning" (click)="ModificarCrearNuevoTramite(tramite.id)" style="margin: 3px;" >Edit</button>
-                    <button class="btn btn-danger"  (click)="deleteTramite(tramite.id)" style="margin: 3px;">Del </button>
-                </td>
-              </tr>
-            </tbody>    
-          </table>
-    </div>
-    <div class="col-sm-1"> </div>
-</div>
+    <div class="row">
+      <div class="col-sm-12"> 
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Identificador</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Costo</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tramite of listaTramites; let i = index;">
+                  <td>{{i + 1}}</td>
+                  <td>{{tramite.id}}</td>
+                  <td>{{tramite.nombre}}</td>
+                  <td>{{tramite.costo}}</td>
+                  <td>
+                    <a  (click)="ModificarCrearNuevoTramite(tramite.id)" 
+                        class="fa fa-pencil-square-o"
+                        ngbPopover="Editar" 
+                        triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+  
+                      <a  (click)="deleteTramite(tramite.id)"
+                        class="fa fa-trash-o"
+                        ngbPopover="Eliminar" 
+                        triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
+                  </td>
+                </tr>
+              </tbody>    
+            </table>
+      </div>
+  </div>
+  </div>
+</block-ui>
+
+

@@ -3,17 +3,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Tramite } from 'src/app/models/modelos';
 import { TramiteService } from 'src/app/services/services';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-manttramite',
   templateUrl: './manttramite.component.html',
   styleUrls: ['./manttramite.component.css']
 })
 export class ManttramiteComponent implements OnInit {
-
-  iduser:number;
+  @BlockUI() blockUI: NgBlockUI;
+  iduser:string;
   formTramite: FormGroup;
   closeResult: string;
   tramite: Tramite;
+  titulo:string ='';
 
   constructor(
     private fB: FormBuilder,
@@ -67,11 +69,13 @@ export class ManttramiteComponent implements OnInit {
   }
 
   getTramite() {
+    this.blockUI.start("Cargando Datos");
     this.tramiteService.getTramiteById(this.iduser.toString()).subscribe(
       res => {
        this.tramite = res[0];
-        
-       this.costo.setValue(this.tramite.costo);
+       this.getFormControl('costo').setValue(this.tramite.costo);
+       this.getFormControl('nombre').setValue(this.tramite.nombre);
+       this.blockUI.stop();
       }
     );
   }
@@ -79,11 +83,13 @@ export class ManttramiteComponent implements OnInit {
   ngOnInit(): void {
     this.iduser = this.activatedRouete.snapshot.params['id'];
 
-    if(this.iduser > 0){
-      this.cargarInfo(this.iduser)
+    if(this.iduser === '0'){
+      //this.cargarInfo(this.iduser)
       this.initForm();
+      this.titulo = "Crear tramite"
     }
     else{
+      this.titulo = "Modificar tramite"
       this.initForm();
       this.getTramite();
       console.log(`vamos a crear un nuevo Id`)
@@ -91,8 +97,8 @@ export class ManttramiteComponent implements OnInit {
 
   }
 
-  cargarInfo(id:number){
-    console.log(`Id a editar ${id}`)
+  getFormControl(tipe:string) {
+    return this.formTramite.controls[tipe];
   }
 
 }

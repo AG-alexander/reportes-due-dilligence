@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { BlockUIModule } from 'ng-block-ui';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -67,7 +67,8 @@ import {
     NgbModule,
     NgbModalModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BlockUIModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

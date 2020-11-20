@@ -1,15 +1,27 @@
 <app-sidebar></app-sidebar>
+
 <div style="margin-left: 20px; margin-right: 20px;">
+    <h1>{{titulo}}</h1>
     <div class="row">
         <div class="form-group col-sm-6">
             <label for="cedulaClientes">Cedula</label>
-            <input 
-              id="cedulaCliente" 
-              [(ngModel)]="cedulaClientes" 
-              type="text" 
-              class="form-control" 
-              placeholder="Introducir cedula" >
-            <button class="btn btn-outline-secondary" type="button" (click)="buscarCliente()">Buscar</button>
+            <div id="cedulaCliente" class="row">
+              <div class="col-sm-11">
+                <input 
+                [(ngModel)]="cedulaClientes" 
+                type="text" 
+                class="form-control" 
+                placeholder="Introducir cedula">
+              </div>
+              <div class="col-sm-1">
+                <a (click)="buscarCliente()" 
+                     class="fa fa-search"
+                     ngbPopover="Buscar" 
+                     triggers="mouseenter:mouseleave" 
+                     style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
+              </div>
+              
+            </div>
         </div>
         <div class="form-group col-sm-6">
             <label for="nombreCliente">Cliente</label>

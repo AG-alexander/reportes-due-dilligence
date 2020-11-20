@@ -3,12 +3,13 @@ import { ClienteService } from "./cliente/cliente.service";
 import { TramiteService } from "./tramite/tramite.service";
 import { InvestigacionService } from "./investigacion/investigacion.service"
 import { PdfService } from "./PDF/pdf.service"
-    import { from } from 'rxjs';
-
+import { AlertService} from "./alert/alert.service"
+import { from } from 'rxjs';
 export {
     DataStorageService,
     ClienteService,
     TramiteService,
     InvestigacionService,
-    PdfService
+    PdfService,
+    AlertService
 }
