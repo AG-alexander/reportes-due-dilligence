@@ -18,7 +18,7 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log("listo!");
+        this
         this.router.navigate(["home"]);
       }).catch((error) => {
         window.alert(error.message)

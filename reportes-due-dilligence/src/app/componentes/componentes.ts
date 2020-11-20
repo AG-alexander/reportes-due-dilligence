@@ -13,7 +13,7 @@ import { TramambientalComponent } from './tramitesforms/tramambiental/tramambien
 import { TramariesgosComponent } from './tramitesforms/tramariesgos/tramariesgos.component';
 import { TramlegalComponent } from './tramitesforms/tramlegal/tramlegal.component';
 import { TributarioComponent } from './tramitesforms/tributario/tributario.component';
-
+import { AuthComponent } from './auth/auth/auth.component';
 
 export { 
     HomeComponent, 
@@ -30,5 +30,6 @@ export {
     TramambientalComponent,
     TramariesgosComponent,
     TramlegalComponent,
-    TributarioComponent
+    TributarioComponent,
+    AuthComponent
 };
