@@ -8,7 +8,7 @@ export interface Investigacioin {
     cliente?: Cliente;
     nombre: string;
     tramites: Tramite[];
-    propiedades: Propiedad[];
+    propiedades: Propiedad;
     observaciones: string;
     porcentajeDeProgreso: number;
     fechaCreacion: Date;

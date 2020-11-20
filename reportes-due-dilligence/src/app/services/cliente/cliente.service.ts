@@ -40,7 +40,7 @@ export class ClienteService {
   }
 
   saveCliente(cliente: Cliente) {
-    if (cliente.id) {
+    if (cliente.id !== "0") {
     //this.blockUI.start("Guardando cambios");
 
       this.angularFirestore.collection<Cliente>('cliente').doc(cliente.id).update(cliente).then(()=>{

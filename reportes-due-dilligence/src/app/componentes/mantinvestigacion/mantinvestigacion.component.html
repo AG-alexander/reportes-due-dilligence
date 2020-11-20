@@ -1,5 +1,4 @@
 <app-sidebar></app-sidebar>
-
 <div style="margin-left: 20px; margin-right: 20px;">
     <div class="row">
         <div class="form-group col-sm-6">
@@ -25,10 +24,24 @@
         </div>
     </div>
     <form [formGroup]="formInvest" (ngSubmit)="guardarInvestigacion()">
-        <div class="form-row">
-          <div class="form-group col-md-6">
+        <div class="form-group row">
+          <div class="col-sm-6">
             <label for="nombre" >Nombre</label>
             <input type="text" formControlName="nombre" class="form-control" id="nombre">
+          </div>
+          <div class="col-sm-6">
+            <label for="tipoLocacion" >Tipo de locacion</label>
+            <input type="text" formControlName="tipoLocacion" class="form-control" id="tipoLocacion">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-11">
+            <label for="direccionPropiedad" >Direccion de la propiedad</label>
+            <input type="text" formControlName="direccionPropiedad" class="form-control" id="direccionPropiedad">
+          </div>
+          <div class="col-sm-1">
+            <label for="tamanno" >Tamaño</label>
+            <input type="number" formControlName="tamanno" class="form-control" id="tamanno">
           </div>
         </div>
         <div class="form-group">
@@ -42,13 +55,13 @@
                 </div>
                 <div class="form-check col-md-4" *ngFor="let tram of listaTramites;let i = index;" >
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input form-control" id="switch{{i}}" (click)="onChange($event, tram.id)">
-                            <label class="custom-control-label" for="switch{{i}}">{{tram.nombre}} - {{tram.costo}} Colones</label>
+                            <input type="checkbox" class="custom-control-input form-control" [checked]="tram.estado" id="switch{{i}}" (click)="onChange($event, tram.id)">
+                            <label class="custom-control-label" for="switch{{i}}" >{{tram.nombre}} - {{tram.costo}} Colones</label>
                         </div>
                     </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <button type="submit" class="btn btn-primary">Enviar Cambios</button>
       </form>
 </div>
 

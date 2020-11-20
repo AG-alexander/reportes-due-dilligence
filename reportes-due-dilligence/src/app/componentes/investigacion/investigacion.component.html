@@ -16,41 +16,64 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">trabajo</th>
                 <th scope="col">nombre</th>
                 <th scope="col">cliente</th>
+                <th scope="col">Estado</th>
                 <th scope="col">costo</th>
                 <th scope="col">tramites</th>
                 <th scope="col">Opciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let invest of listaInvest;">
-                <th scope="row">{{invest.id}}</th>
-                <td>{{invest.numeroDeTrabajo}}</td>
+              <tr *ngFor="let invest of listaInvest;let i = index">
+                <th scope="row">{{i+1}}</th>
                 <td>{{invest.nombre}}</td>
-                <td>{{invest.idCliente}}</td>
+                <td>{{invest.cliente.nombre}}</td>
+                <td>{{invest.Estado}}</td>
                 <td>{{invest.Total}}</td>
-                <td *ngFor="let tram of invest.tramites;">
-                  <div *ngIf="tram.nombre == 'Estudio Ambiental'">
-                      <a routerLink="/tramiteambiental/{{invest.id}}">{{tram.nombre}}</a>
+                <td >
+                  <div style="display: flex;">
+                    <div *ngFor="let tram of invest.tramites;" style="padding-left:10px;">
+                      <a *ngIf="tram.nombre == 'Estudio Ambiental'" 
+                          routerLink="/tramiteambiental/{{invest.id}}"  
+                          style="font-size: 24px;" 
+                          ngbPopover="{{tram.nombre}}" 
+                          triggers="mouseenter:mouseleave" 
+                          class="fa fa-tree"></a>
+  
+                      <a *ngIf="tram.nombre == 'Estudio de Riesgos'" 
+                          routerLink="/tramiteriesgos/{{invest.id}}" 
+                          style="font-size: 24px;"
+                          ngbPopover="{{tram.nombre}}" 
+                          triggers="mouseenter:mouseleave" 
+                          class="fa fa-exclamation-triangle"></a>
+                          
+                      <a *ngIf="tram.nombre == 'Estudio Tributario'"
+                          routerLink="/tramiteTributario/{{invest.id}}" 
+                          style="font-size: 24px;"
+                          ngbPopover="{{tram.nombre}}" 
+                          triggers="mouseenter:mouseleave" 
+                          class="fa fa-money"></a>
+                          
+                      <a *ngIf="tram.nombre == 'Estudio legal'" 
+                          routerLink="/tramitelegal/{{invest.id}}" 
+                          style="font-size: 24px;" 
+                          ngbPopover="{{tram.nombre}}" 
+                          triggers="mouseenter:mouseleave" 
+                          class="fa fa-gavel" ></a>
+  
+                      <a *ngIf="tram.nombre == 'Estudio Topografico'" 
+                        routerLink="/tramiteTopografico/{{invest.id}}" 
+                        style="font-size: 24px;" 
+                        ngbPopover="{{tram.nombre}}" 
+                        triggers="mouseenter:mouseleave" 
+                        class="fa fa-map-marker"></a>
+                      </div>
                   </div>
-                  <div *ngIf="tram.nombre == 'Estudio de Riesgos'">
-                    <a routerLink="/tramiteriesgos/{{invest.id}}">{{tram.nombre}}</a>
-                  </div>
-                  <div *ngIf="tram.nombre == 'Estudio Tributario'">
-                    <a routerLink="/tramiteTributario/{{invest.id}}">{{tram.nombre}}</a>
-                  </div>
-                  <div *ngIf="tram.nombre == 'Estudio legal'">
-                    <a routerLink="/tramitelegal/{{invest.id}}">{{tram.nombre}}</a>
-                  </div>
-                  <div *ngIf="tram.nombre == 'Estudio Topografico'">
-                    <a routerLink="/tramiteTopografico/{{invest.id}}">{{tram.nombre}}</a>
-                  </div> 
                 </td>
                 <td>
-                    <button class="btn btn-warning" style="margin: 3px;" >Edit</button>
-                    <button class="btn btn-danger"  style="margin: 3px;">Del </button>
+                    <button class="btn btn-warning" style="margin: 3px;" (click)="ModificarCrearNuevoTrabajo(invest.id)">Edit</button>
+                    <button class="btn btn-danger"  style="margin: 3px;" (click)="DeleteTrabajo(invest.id)">Del </button>
                 </td>
               </tr>
             </tbody>    

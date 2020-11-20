@@ -42,72 +42,19 @@ export class InvestigacionComponent implements OnInit {
         console.log(this.listaInvest)
       }
     );
-    // var cliente:Cliente = { 
-    //   nombre: "Alex",
-    //   tipo: 1,
-    //   identificacion: "112450987",
-    //   id: "2",
-    //   contactos:[]                      
-    // }
-
-    // var tram:Tramite[] = []
-    // tram.push(this.listaTramites[0])
-    // tram.push(this.listaTramites[2])
-    // tram.push(this.listaTramites[4])
-
-    // var Invest:Investigacioin = { 
-    //   nombre: "Investigacion 1",
-    //   idCliente: "112450987",
-    //   cliente: cliente,
-    //   id: "1",
-    //   tramites: tram,
-    //   Estado: "Procesando",
-    //   observaciones:"",
-    //   porcentajeDeProgreso:0,
-    //   propiedades:[],
-    //   fechaCreacion: new Date,
-    //   Total: 0
-    // }
-    // this.listaInvest.push(Invest)
-  
-    // var cliente:Cliente = { 
-    //   nombre: "Alan",
-    //   tipo: 1,
-    //   identificacion: "112940144",
-    //   id: "2",
-    //   contactos:[]                      
-    // }
-
-    // var tram:Tramite[] = []
-    // tram.push(this.listaTramites[0])
-    // tram.push(this.listaTramites[1])
-    // tram.push(this.listaTramites[3])
-
-    // var Invest:Investigacioin = { 
-    //   nombre: "Investigacion 2",
-    //   idCliente: "112940144",
-    //   cliente: cliente,
-    //   id: "2",
-    //   tramites: tram,
-    //   Estado: "Procesando",
-    //   observaciones:"",
-    //   porcentajeDeProgreso:0,
-    //   propiedades:[],
-    //   fechaCreacion: new Date,
-    //   Total: 0
-    // }
-    // this.listaInvest.push(Invest)
-    // this.getTotal()
-   
   }
 
-  getTotal(){
-    for (let inves of this.listaInvest) {
-      for (let i of inves.tramites) {
-        inves.Total += i.costo 
-      }
-      console.log(inves) 
-    }
+  DeleteTrabajo(investid){
+    this.investigacionService.deleteinvestigacioin(investid);
   }
+
+  // getTotal(){
+  //   for (let inves of this.listaInvest) {
+  //     for (let i of inves.tramites) {
+  //       inves.Total += i.costo 
+  //     }
+  //     console.log(inves) 
+  //   }
+  // }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataStorageService } from '../dataStore/data-store.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Investigacioin } from "../../models/modelos";
+import { Investigacioin, Propiedad } from "../../models/modelos";
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 
@@ -52,19 +52,33 @@ export class InvestigacionService {
      
     } else {
       investigacioin.id = this.angularFirestore.createId();
+      investigacioin.propiedades.idCliente= investigacioin.idCliente;
+      investigacioin.propiedades.id = this.angularFirestore.createId();
     //this.blockUI.start("Guardando cambios");
 
-      this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).set(investigacioin).then(()=>{
+    this.angularFirestore.collection<Investigacioin>('Propiedad').doc(investigacioin.propiedades.id).set(investigacioin.propiedades).then(()=>{
       //this.blockUI.stop();
 
         //this.alertas.successInfoAlert("Inserción exitosa");
-        this.location.back();
+        this.angularFirestore.collection<Investigacioin>('investigacioin').doc(investigacioin.id).set(investigacioin).then(()=>{
+          //this.blockUI.stop();
+    
+            //this.alertas.successInfoAlert("Inserción exitosa");
+            this.location.back();
+          }).catch((err)=>{
+          //this.blockUI.stop();
+    
+            //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
+            this.location.back();
+          });
       }).catch((err)=>{
       //this.blockUI.stop();
 
         //this.alertas.errorInfoAlert("Ha ocurrido un error, no se pudo guardar el nuevo registro");
         this.location.back();
       });
+
+      
     }
   }
 }

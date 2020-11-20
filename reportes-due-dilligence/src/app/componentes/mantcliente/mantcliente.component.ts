@@ -49,6 +49,7 @@ export class MantclienteComponent implements OnInit {
       nombre: ['', Validators.required],
       tipo: ['', Validators.required],
       identificacion: ['', Validators.required],
+      email: ['', Validators.required],
       contactos: [[], [Validators.required, listValidator]]
     });
   }
@@ -58,6 +59,7 @@ export class MantclienteComponent implements OnInit {
       nombre: [this.cliente.nombre, Validators.required],
       tipo: [this.cliente.tipo, Validators.required],
       identificacion: [this.cliente.identificacion, Validators.required],
+      email: [this.cliente.email, Validators.required],
       contactos: [this.cliente.contactos, [Validators.required, listValidator]]
     });
   }
@@ -82,6 +84,9 @@ export class MantclienteComponent implements OnInit {
   }
   get contactoDescription() {
     return this.formContacto.controls["contactoDescription"];
+  }
+  get email() {
+    return this.formCliente.controls["email"];
   }
 
   deleteContact(index) {
@@ -157,6 +162,7 @@ export class MantclienteComponent implements OnInit {
        this.tipo.setValue(this.cliente.tipo);
        this.identificacion.setValue(this.cliente.identificacion);
        this.contactos.setValue(this.cliente.contactos);
+       this.email.setValue(this.cliente.contactos);
       }
     );
   }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 
 //Clases
-import { Tramite, Investigacioin, Cliente } from 'src/app/models/modelos';
+import { Tramite, Investigacioin, Cliente, Propiedad } from 'src/app/models/modelos';
 //servicios 
 import { TramiteService, InvestigacionService, ClienteService } from './../../services/services'
 
@@ -24,6 +24,8 @@ export class MantinvestigacionComponent implements OnInit {
   idinvest: string;
   nombreClientes: string = "";
   cedulaClientes: string = "";
+  EditorInvest: Investigacioin;
+  isChecked:boolean = true;
 
   constructor(
     private tramiteService: TramiteService,
@@ -36,12 +38,18 @@ export class MantinvestigacionComponent implements OnInit {
     this.getlistTramites();
     this.initForm();
     this.idinvest = this.activatedRouete.snapshot.params['id'];
+    if(this.idinvest !== "0"){
+      this.getInvest(); 
+    }
   }
 
   initForm() {
     this.formInvest = this.fB.group({
       nombre: [''],
-      observaciones: ['']
+      observaciones: [''],
+      tipoLocacion:[''],
+      direccionPropiedad:[''],
+      tamanno:[0]
     });
   }
 
@@ -57,6 +65,14 @@ export class MantinvestigacionComponent implements OnInit {
 
     let Total = 0;
 
+    let prop: Propiedad = {
+      direccionPropiedad: this.formInvest.controls['direccionPropiedad'].value,
+      tamanno: this.formInvest.controls['tamanno'].value,
+      tipoLocacion:this.formInvest.controls['tipoLocacion'].value,
+      idCliente:this.cliente.id,
+      id:"0"
+    }
+
     for (let i of this.listaTramitesSeleionada) {
       Total += i.costo 
     }
@@ -70,7 +86,7 @@ export class MantinvestigacionComponent implements OnInit {
       porcentajeDeProgreso: 0,
       Estado: 'Iniciado',
       Total: Total,
-      propiedades:[],
+      propiedades: prop,
       fechaCreacion: new Date,
       id: this.idinvest
     };
@@ -86,10 +102,7 @@ export class MantinvestigacionComponent implements OnInit {
         this.nombreClientes = this.cliente.nombre
       }
     );
-
-    
   }
-
   onChange(event, tramiteId) {
 
     if(event.target.checked){
@@ -102,6 +115,37 @@ export class MantinvestigacionComponent implements OnInit {
       this.listaTramitesSeleionada.splice(index,1)
     }
     console.log(this.listaTramitesSeleionada)
+  }
+
+  getInvest() {
+    this.investigacionService.getinvestigacioinById(this.idinvest.toString()).subscribe(
+      res => {
+        this.EditorInvest = res[0];
+        this.cedulaClientes = this.EditorInvest.cliente.identificacion; 
+        this.nombreClientes = this.EditorInvest.cliente.nombre; 
+        this.getFormControl('nombre').setValue(this.EditorInvest.nombre);
+        this.getFormControl('observaciones').setValue(this.EditorInvest.nombre);
+        this.getFormControl('tipoLocacion').setValue(this.EditorInvest.propiedades.tipoLocacion);
+        this.getFormControl('direccionPropiedad').setValue(this.EditorInvest.propiedades.direccionPropiedad);
+        this.getFormControl('tamanno').setValue(this.EditorInvest.propiedades.tamanno);
+        this.cliente  = this.EditorInvest.cliente
+        for (let i of this.listaTramites) {
+          let index =  this.EditorInvest.tramites.findIndex(x =>  x.id === i.id);
+          if(index !== -1){
+            i.estado = true;
+          }
+          else{
+            i.estado = false;
+          }
+        }
+        this.listaTramitesSeleionada = this.EditorInvest.tramites
+        console.log(this.listaTramites)
+      }
+    );
+  }
+
+  getFormControl(tipe:string) {
+    return this.formInvest.controls[tipe];
   }
 
 }
