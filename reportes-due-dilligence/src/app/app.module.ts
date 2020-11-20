@@ -16,6 +16,8 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/stor
 import { ReactiveFormsModule } from "@angular/forms";
 import {NgbModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { HttpClientModule } from "@angular/common/http";
+
 import {
   HomeComponent, 
   LoginComponent, 
@@ -64,7 +66,8 @@ import {
     ReactiveFormsModule,
     NgbModule,
     NgbModalModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
