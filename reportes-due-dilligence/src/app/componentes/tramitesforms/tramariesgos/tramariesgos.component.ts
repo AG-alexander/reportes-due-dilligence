@@ -37,6 +37,12 @@ export class TramariesgosComponent implements OnInit {
     })
     this.invService.saveinvestigacioin(this.investigacion);
   }
+
+  fillForm(data) {
+    this.formRiesgos.controls["obserZona"].setValue(data["obserZona"]);
+    this.formRiesgos.controls["zonaRiesgo"].setValue(data["zonaRiesgo"]);
+    this.formRiesgos.controls["estado"].setValue(data["estado"]);
+  }
   
   ngOnInit(): void {
     this.initForm();
@@ -44,7 +50,14 @@ export class TramariesgosComponent implements OnInit {
     this.invService.getinvestigacioinById(this.idinvest).subscribe(
       res => {
         this.investigacion = res[0];
-        console.log(this.investigacion);
+        this.investigacion.tramites.forEach(t => {
+          if (t.id == "U70iX62RaEy6tSridUda") {
+            if(t["estudio"]) {
+              this.fillForm(t["estudio"]);
+            }
+          }
+        });
+        
       }
     );
   }

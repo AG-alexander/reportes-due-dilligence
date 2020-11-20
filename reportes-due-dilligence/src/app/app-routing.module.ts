@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'investigacion', component: InvestigacionComponent },
   { path: 'manttramite/:id', component: ManttramiteComponent },
   { path: 'mantinvestigacion/:id', component: MantinvestigacionComponent },
-  { path: 'tramiteTopografico/:trabajoId', component: TopograficoComponent },
+  { path: 'tramiteTopografico/:id', component: TopograficoComponent },
   { path: 'tramiteambiental/:id', component: TramambientalComponent },
   { path: 'tramiteriesgos/:id', component: TramariesgosComponent},
   { path: 'tramitelegal/:id', component:  TramlegalComponent},
