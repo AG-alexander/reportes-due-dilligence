@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { InvestigacionService } from 'src/app/services/services';
 import { Investigacioin } from 'src/app/models/modelos';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+// import { AlertService } from './../../services/alert/alert.service';
 
 @Component({
   selector: 'app-topografico',
@@ -10,10 +12,11 @@ import { Investigacioin } from 'src/app/models/modelos';
   styleUrls: ['./topografico.component.css']
 })
 export class TopograficoComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   idinvest: string;
   formTopografico: FormGroup;
   investigacion: Investigacioin;
+
   constructor(
     private fB: FormBuilder,
     private activatedRouete: ActivatedRoute,
@@ -38,8 +41,12 @@ export class TopograficoComponent implements OnInit {
     this.invService.saveinvestigacioin(this.investigacion);
   }
 
+  getFormControl(form:string){
+    return this.formTopografico.controls[form];
+  }
+
   fillForm(data) {
-    this.formTopografico.controls["tipoSuelo"].setValue(data["tipoSuelo"]);
+    this.getFormControl("tipoSuelo").setValue(data["tipoSuelo"]);
     this.formTopografico.controls["locacion"].setValue(data["locacion"]);
     this.formTopografico.controls["altura"].setValue(data["altura"]);
     this.formTopografico.controls["coordenadas"].setValue(data["coordenadas"]);
@@ -49,6 +56,7 @@ export class TopograficoComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.idinvest = this.activatedRouete.snapshot.params['id'];
+    this.blockUI.start("Cargando Datos");
     this.invService.getinvestigacioinById(this.idinvest).subscribe(
       res => {
         this.investigacion = res[0];
@@ -56,6 +64,7 @@ export class TopograficoComponent implements OnInit {
           if (t.id == "ntWqBtVEnI3qZHkOYhym") {
             if (t["estudio"]) {
               this.fillForm(t["estudio"]);
+              this.blockUI.stop();
             }
           }
         });

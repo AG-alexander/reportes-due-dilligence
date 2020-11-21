@@ -1,100 +1,103 @@
-<app-sidebar></app-sidebar>
-<div style="margin-left: 20px; margin-right: 20px;">
-  <div class="row">
-    <div class="col-sm-11"> 
-        <h1>Mantenimiento de Investigaciones</h1>
+<block-ui>
+  <app-sidebar></app-sidebar>
+  <div style="margin-left: 20px; margin-right: 20px;">
+    <div class="row">
+      <div class="col-sm-11"> 
+          <h1>Mantenimiento de Investigaciones</h1>
+      </div>
+      <div class="col-sm-1">
+        <a (click)="ModificarCrearNuevoTrabajo(0)"  
+                       class="fa fa fa-plus"
+                       ngbPopover="Agregar" 
+                       triggers="mouseenter:mouseleave" 
+                       style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
+      </div>
     </div>
-    <div class="col-sm-1">
-      <a (click)="ModificarCrearNuevoTrabajo(0)"  
-                     class="fa fa fa-plus"
-                     ngbPopover="Agregar" 
-                     triggers="mouseenter:mouseleave" 
-                     style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
-    </div>
+    <div class="row">
+      <div class="col-sm-12"> 
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">nombre</th>
+                  <th scope="col">cliente</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">costo</th>
+                  <th scope="col">tramites</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let invest of listaInvest;let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{invest.nombre}}</td>
+                  <td>{{invest.cliente.nombre}}</td>
+                  <td>{{invest.Estado}}</td>
+                  <td>{{invest.Total}}</td>
+                  <td >
+                    <div style="display: flex;">
+                      <div *ngFor="let tram of invest.tramites;" style="padding-left:10px;">
+                        <a *ngIf="tram.nombre == 'Estudio Ambiental'" 
+                            routerLink="/tramiteambiental/{{invest.id}}"  
+                            style="font-size: 32px; color:rgb(80, 197, 226);" 
+                            ngbPopover="{{tram.nombre}}" 
+                            triggers="mouseenter:mouseleave" 
+                            class="fa fa-tree"></a>
+    
+                        <a *ngIf="tram.nombre == 'Estudio de Riesgos'" 
+                            routerLink="/tramiteriesgos/{{invest.id}}" 
+                            style="font-size: 32px; color: rgb(80, 197, 226);"
+                            ngbPopover="{{tram.nombre}}" 
+                            triggers="mouseenter:mouseleave" 
+                            class="fa fa-exclamation-triangle"></a>
+                            
+                        <a *ngIf="tram.nombre == 'Estudio Tributario'"
+                            routerLink="/tramiteTributario/{{invest.id}}" 
+                            style="font-size: 32px; color: rgb(80, 197, 226);"
+                            ngbPopover="{{tram.nombre}}" 
+                            triggers="mouseenter:mouseleave" 
+                            class="fa fa-money"></a>
+                            
+                        <p *ngIf="tram.nombre == 'Estudio legal'" 
+                            routerLink="/tramitelegal/{{invest.id}}" 
+                            style="font-size: 32px; color: rgb(80, 197, 226);" 
+                            ngbPopover="{{tram.nombre}}" 
+                            triggers="mouseenter:mouseleave" 
+                            class="fa fa-gavel" ></p>
+    
+                        <a *ngIf="tram.nombre == 'Estudio Topografico'" 
+                          routerLink="/tramiteTopografico/{{invest.id}}" 
+                          style="font-size: 32px; color:  rgb(80, 197, 226);" 
+                          ngbPopover="{{tram.nombre}}" 
+                          triggers="mouseenter:mouseleave" 
+                          class="fa fa-map-marker"></a>
+                        </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a (click)="generarPDF(invest.id)"  
+                       class="fa fa-file-pdf-o"
+                       ngbPopover="Enviar PDF" 
+                       triggers="mouseenter:mouseleave" 
+                       style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+  
+                    <a  (click)="ModificarCrearNuevoTrabajo(invest.id)"  
+                        class="fa fa-pencil-square-o"
+                        ngbPopover="Editar" 
+                       triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+  
+                    <a  (click)="DeleteTrabajo(invest.id)"
+                        class="fa fa-trash-o"
+                        ngbPopover="Eliminar" 
+                        triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
+                  </td>
+                </tr>
+              </tbody>    
+            </table>
+      </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12"> 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">nombre</th>
-                <th scope="col">cliente</th>
-                <th scope="col">Estado</th>
-                <th scope="col">costo</th>
-                <th scope="col">tramites</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let invest of listaInvest;let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td>{{invest.nombre}}</td>
-                <td>{{invest.cliente.nombre}}</td>
-                <td>{{invest.Estado}}</td>
-                <td>{{invest.Total}}</td>
-                <td >
-                  <div style="display: flex;">
-                    <div *ngFor="let tram of invest.tramites;" style="padding-left:10px;">
-                      <a *ngIf="tram.nombre == 'Estudio Ambiental'" 
-                          routerLink="/tramiteambiental/{{invest.id}}"  
-                          style="font-size: 32px; color:rgb(80, 197, 226);" 
-                          ngbPopover="{{tram.nombre}}" 
-                          triggers="mouseenter:mouseleave" 
-                          class="fa fa-tree"></a>
-  
-                      <a *ngIf="tram.nombre == 'Estudio de Riesgos'" 
-                          routerLink="/tramiteriesgos/{{invest.id}}" 
-                          style="font-size: 32px; color: rgb(80, 197, 226);"
-                          ngbPopover="{{tram.nombre}}" 
-                          triggers="mouseenter:mouseleave" 
-                          class="fa fa-exclamation-triangle"></a>
-                          
-                      <a *ngIf="tram.nombre == 'Estudio Tributario'"
-                          routerLink="/tramiteTributario/{{invest.id}}" 
-                          style="font-size: 32px; color: rgb(80, 197, 226);"
-                          ngbPopover="{{tram.nombre}}" 
-                          triggers="mouseenter:mouseleave" 
-                          class="fa fa-money"></a>
-                          
-                      <p *ngIf="tram.nombre == 'Estudio legal'" 
-                          routerLink="/tramitelegal/{{invest.id}}" 
-                          style="font-size: 32px; color: rgb(80, 197, 226);" 
-                          ngbPopover="{{tram.nombre}}" 
-                          triggers="mouseenter:mouseleave" 
-                          class="fa fa-gavel" ></p>
-  
-                      <a *ngIf="tram.nombre == 'Estudio Topografico'" 
-                        routerLink="/tramiteTopografico/{{invest.id}}" 
-                        style="font-size: 32px; color:  rgb(80, 197, 226);" 
-                        ngbPopover="{{tram.nombre}}" 
-                        triggers="mouseenter:mouseleave" 
-                        class="fa fa-map-marker"></a>
-                      </div>
-                  </div>
-                </td>
-                <td>
-                  <a (click)="generarPDF(invest.id)"  
-                     class="fa fa-file-pdf-o"
-                     ngbPopover="Enviar PDF" 
-                     triggers="mouseenter:mouseleave" 
-                     style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+  </div>
+</block-ui>
 
-                  <a  (click)="ModificarCrearNuevoTrabajo(invest.id)"  
-                      class="fa fa-pencil-square-o"
-                      ngbPopover="Editar" 
-                     triggers="mouseenter:mouseleave"  
-                      style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
-
-                  <a  (click)="DeleteTrabajo(invest.id)"
-                      class="fa fa-trash-o"
-                      ngbPopover="Eliminar" 
-                      triggers="mouseenter:mouseleave"  
-                      style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
-                </td>
-              </tr>
-            </tbody>    
-          </table>
-    </div>
-</div>
-</div>

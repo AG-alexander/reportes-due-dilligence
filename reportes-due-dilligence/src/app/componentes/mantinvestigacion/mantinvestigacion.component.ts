@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 //Clases
 import { Tramite, Investigacioin, Cliente, Propiedad } from 'src/app/models/modelos';
 //servicios 
@@ -13,7 +13,7 @@ import { TramiteService, InvestigacionService, ClienteService } from './../../se
   styleUrls: ['./mantinvestigacion.component.css']
 })
 export class MantinvestigacionComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   formInvest: FormGroup;
 
   listaTramites:Tramite[] = [];
@@ -41,6 +41,7 @@ export class MantinvestigacionComponent implements OnInit {
     this.idinvest = this.activatedRouete.snapshot.params['id'];
     
     if(this.idinvest !== "0"){
+      
       this.titulo = "Modificar investigación"
       this.getInvest(); 
     }
@@ -124,6 +125,7 @@ export class MantinvestigacionComponent implements OnInit {
   }
 
   getInvest() {
+    this.blockUI.start("Cargando Datos");
     this.investigacionService.getinvestigacioinById(this.idinvest.toString()).subscribe(
       res => {
         this.EditorInvest = res[0];
@@ -145,7 +147,8 @@ export class MantinvestigacionComponent implements OnInit {
           }
         }
         this.listaTramitesSeleionada = this.EditorInvest.tramites
-        console.log(this.listaTramites)
+        this.blockUI.stop();
+        console.log(this.listaTramites);
       }
     );
   }

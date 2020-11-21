@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Cliente } from './../../models/modelos';
 import { ClienteService } from "../../services/services";
 
@@ -12,6 +12,7 @@ import { ClienteService } from "../../services/services";
   styleUrls: ['./clientes.component.css']
 })
 export class ClientesComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   fgCliente: FormGroup;
   listaClientes:Cliente[] = []
 
@@ -35,30 +36,13 @@ export class ClientesComponent implements OnInit {
 
 
   fiillist(){
-
+    this.blockUI.start("Cargando Datos");
     this.clienteService.getClientes().subscribe(
       res => {
         this.listaClientes = res;
+        this.blockUI.stop();
       }
     );
-
-    /*var cliente1:Cliente = { 
-      nombre: "Alan",
-      tipo: 1,
-      identidficacion: "112940144",
-      id: "1",
-      contactos:[]                      
-    }
-    this.listaClientes.push(cliente1)
-  
-    var cliente2:Cliente = { 
-      nombre: "Alex",
-      tipo: 1,
-      identidficacion: "112450987",
-      id: "2",
-      contactos:[]                      
-    }
-    this.listaClientes.push(cliente2)*/
   }
 }
 

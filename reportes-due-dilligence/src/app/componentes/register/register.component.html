@@ -1,11 +1,21 @@
-<p>register works!</p>
-<form action="" (ngSubmit)="doSingUp()"  [formGroup]="formRegister">
-    <div>
-        <input type="text" formControlName="email">
-    </div>
-    <div>
-        <input type="password" formControlName="password">
-    </div>
-
-    <button type="submit">Sing Up</button>
-</form>
+<div class="container login-form">
+	<div class="panel panel-default">
+		<div class="panel-body">
+            <h2 class="login-title">Registrar usurio</h2>
+			<form action="" (ngSubmit)="doSingUp()"  [formGroup]="formRegister">
+				<div class="input-group login-userinput">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+					<input id="txtUser" type="text" class="form-control" formControlName="email" placeholder="algo@algo.com">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+					<input  id="txtPassword" type="password" class="form-control" formControlName="password" placeholder="Password">
+				</div>
+				<button class="btn btn-primary btn-block login-button" type="submit"><i class="fa fa-user-plus"></i> Registro</button>
+				<div class="checkbox login-options">
+					<a routerLink="/log-in" class="login-forgot">Inicio de sección</a>
+				</div>		
+			</form>			
+		</div>
+	</div>
+</div>

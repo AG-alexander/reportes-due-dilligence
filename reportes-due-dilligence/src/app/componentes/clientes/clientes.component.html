@@ -1,53 +1,56 @@
-<app-sidebar></app-sidebar>
-<div style="margin-left: 20px; margin-right: 20px;">
-  <div class="row">
-    <div class="col-sm-11"> 
-        <h1>Mantenimiento de Clientes</h1>
-    </div>
-    <div class="col-sm-1">
-      <a (click)="ModificarCrearNuevoCliente(0)"
-                    class="fa fa fa-plus"
-                    ngbPopover="Agregar" 
-                    triggers="mouseenter:mouseleave" 
-                    style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-12"> 
-          <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Identificación</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Tipo</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let cliente of listaClientes; let i = index;">
-                  <td>{{i + 1}}</td>
-                  <td>{{cliente.nombre}}</td>
-                  <td>{{cliente.identificacion}}</td>
-                  <td>{{cliente.email}}</td>
-                  <td>{{cliente.tipo}}</td>
-                  <td>
-                    <a  (click)="ModificarCrearNuevoCliente(cliente.id)"  
-                      class="fa fa-pencil-square-o"
-                      ngbPopover="Editar" 
-                      triggers="mouseenter:mouseleave"  
-                      style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
-
-                    <a  (click)="deleteCliente(cliente.id)"
-                      class="fa fa-trash-o"
-                      ngbPopover="Eliminar" 
-                      triggers="mouseenter:mouseleave"  
-                      style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
-                    </td>
-                </tr>
-              </tbody>    
-            </table>
+<block-ui>
+  <app-sidebar></app-sidebar>
+  <div style="margin-left: 20px; margin-right: 20px;">
+    <div class="row">
+      <div class="col-sm-11"> 
+          <h1>Mantenimiento de Clientes</h1>
       </div>
+      <div class="col-sm-1">
+        <a (click)="ModificarCrearNuevoCliente(0)"
+                      class="fa fa fa-plus"
+                      ngbPopover="Agregar" 
+                      triggers="mouseenter:mouseleave" 
+                      style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12"> 
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Identificación</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cliente of listaClientes; let i = index;">
+                    <td>{{i + 1}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.identificacion}}</td>
+                    <td>{{cliente.email}}</td>
+                    <td>{{cliente.tipo}}</td>
+                    <td>
+                      <a  (click)="ModificarCrearNuevoCliente(cliente.id)"  
+                        class="fa fa-pencil-square-o"
+                        ngbPopover="Editar" 
+                        triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
+  
+                      <a  (click)="deleteCliente(cliente.id)"
+                        class="fa fa-trash-o"
+                        ngbPopover="Eliminar" 
+                        triggers="mouseenter:mouseleave"  
+                        style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
+                      </td>
+                  </tr>
+                </tbody>    
+              </table>
+        </div>
+    </div>
   </div>
-</div>
+</block-ui>
+

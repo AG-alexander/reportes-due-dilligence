@@ -1,28 +1,71 @@
-<div class="container">
-    <div>
-        <h2>Estudio Topografico</h2>
+<block-ui>
+    <div style="margin-left: 20px; margin-right: 20px;">
+        <h1>Estudio Topografico</h1>
         <form action="" [formGroup]="formTopografico" (ngSubmit)="saveTopografico()">
             <div class="form-group">
                 <label for="tipoSuelo">Tipo de suelo</label>
-                <textarea class="form-control" formControlName="tipoSuelo" id="tipoSuelo"></textarea>
+                <textarea 
+                    class="form-control" 
+                    formControlName="tipoSuelo" 
+                    id="tipoSuelo" 
+                    [ngClass]="{'is-invalid': getFormControl('tipoSuelo').touched 
+                               && getFormControl('tipoSuelo').errors,
+                               'is-valid': getFormControl('tipoSuelo').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('tipoSuelo').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle de tipo de suelo es requerido
+                </div>  
             </div>
             <div class="form-group">
                 <label for="locacion">Locacion de la propiedad</label>
-                <input type="text" class="form-control" formControlName="locacion" id="locacion">
+                <input type="text"  
+                       class="form-control" 
+                       formControlName="locacion"  
+                       id="locacion"
+                       [ngClass]="{'is-invalid': getFormControl('locacion').touched 
+                               && getFormControl('locacion').errors,
+                               'is-valid': getFormControl('locacion').valid }">
+                <div *ngIf="getFormControl('locacion').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * La locacion es requerido
+                </div>   
             </div>
             <div class="form-group">
                 <label for="altura">Altura de la propiedad respecto a la altura del mar</label>
-                <input type="text" class="form-control" formControlName="altura" id="altura">
+                <input type="text" 
+                       class="form-control" 
+                       formControlName="altura" 
+                       id="altura"
+                       [ngClass]="{'is-invalid': getFormControl('altura').touched 
+                       && getFormControl('altura').errors,
+                       'is-valid': getFormControl('altura').valid }">
+                <div *ngIf="getFormControl('altura').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * La altura de la propiedad es requerido
+                </div> 
             </div>
             <div class="form-group">
                 <label for="coordenadas">Coordenadas geograficas de la propiedad</label>
-                <input type="text" class="form-control" formControlName="coordenadas" id="coordenadas">
+                <input type="text" 
+                       class="form-control" 
+                       formControlName="coordenadas" 
+                       id="coordenadas"[ngClass]="{'is-invalid': getFormControl('coordenadas').touched 
+                       && getFormControl('coordenadas').errors,
+                       'is-valid': getFormControl('coordenadas').valid }">
+                <div *ngIf="getFormControl('coordenadas').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * Las coordenadas de la propiedad son requerido
+                </div> 
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
-                <label for="estado" class="form-check-label">Estado del estudio</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input form-control"  id="estado" formControlName="estado">
+                <label class="custom-control-label" for="estado" >Estado del estudio</label>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="formTopografico.invalid">Guardar</button>
         </form>
+    </div>
+</block-ui>
+
+<div class="container">
+    <div>
+        
+        
     </div>
 </div>
