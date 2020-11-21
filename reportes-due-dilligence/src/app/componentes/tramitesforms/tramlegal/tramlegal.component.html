@@ -1,16 +1,27 @@
-<div class="container">
-    <div>
+<block-ui>
+    <app-sidebar></app-sidebar>
+    <div style="margin-left: 20px; margin-right: 20px;">
         <h2>Estudio Legal</h2>
         <form action="" [formGroup]="formLegal" (ngSubmit)="saveLegal()">
             <div class="form-group">
                 <label for="demandas">Demandas</label>
-                <textarea class="form-control" formControlName="demandas" id="demandas"></textarea>
+                <textarea class="form-control" 
+                          formControlName="demandas" 
+                          id="demandas"
+                          [ngClass]="{'is-invalid': getFormControl('demandas').touched 
+                               && getFormControl('demandas').errors,
+                               'is-valid': getFormControl('demandas').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('demandas').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle problemas legales es requerido
+                </div>  
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
-                <label for="estado" class="form-check-label">Estado del estudio</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input form-control"  id="estado" formControlName="estado">
+                <label class="custom-control-label" for="estado" >Estado del estudio</label>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="formLegal.invalid">Guardar</button>
         </form>
+    
     </div>
-</div>
+</block-ui>
