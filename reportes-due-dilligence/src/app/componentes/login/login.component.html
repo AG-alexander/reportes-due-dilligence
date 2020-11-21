@@ -5,13 +5,35 @@
 			<form action="" (ngSubmit)="doSingIn()" [formGroup]="formLogin">
 				<div class="input-group login-userinput">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-					<input id="txtUser" type="text" class="form-control" formControlName="email" placeholder="algo@algo.com">
+					<input id="txtUser" 
+					type="text" 
+					class="form-control" 
+					formControlName="email" 
+					placeholder="algo@algo.com"
+					[ngClass]="{'is-invalid': getFormControl('email').touched 
+                    && getFormControl('email').errors,
+                    'is-valid': getFormControl('email').valid }">
+              <div *ngIf="getFormControl('email').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Email
+              </div>
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input  id="txtPassword" type="password" class="form-control" formControlName="password" placeholder="Password">
+					<input  id="txtPassword" 
+					type="password" 
+					class="form-control" 
+					formControlName="password" 
+					placeholder="Password"
+					[ngClass]="{'is-invalid': getFormControl('password').touched 
+                    && getFormControl('password').errors,
+                    'is-valid': getFormControl('password').valid }">
+              <div *ngIf="getFormControl('password').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Password
+              </div>
 				</div>
-				<button class="btn btn-primary btn-block login-button" type="submit"><i class="fa fa-sign-in"></i> Entrar</button>
+				<button class="btn btn-primary btn-block login-button" type="submit" [disabled]="formLogin.invalid"><i class="fa fa-sign-in"></i> Entrar</button>
 				<div class="checkbox login-options">
 					<a routerLink="/sing-up" class="login-forgot">Registrar nuevo usuario</a>
 				</div>		

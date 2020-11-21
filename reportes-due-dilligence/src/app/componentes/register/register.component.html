@@ -5,13 +5,34 @@
 			<form action="" (ngSubmit)="doSingUp()"  [formGroup]="formRegister">
 				<div class="input-group login-userinput">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-					<input id="txtUser" type="text" class="form-control" formControlName="email" placeholder="algo@algo.com">
+					<input id="txtUser" 
+					type="text" 
+					class="form-control" 
+					formControlName="email" 
+					placeholder="algo@algo.com"
+					[ngClass]="{'is-invalid': getFormControl('email').touched 
+                    && getFormControl('email').errors,
+                    'is-valid': getFormControl('email').valid }">
+              <div *ngIf="getFormControl('email').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Email
+              </div>
 				</div>
 				<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-					<input  id="txtPassword" type="password" class="form-control" formControlName="password" placeholder="Password">
+					<input  id="txtPassword" 
+					type="password" 
+					class="form-control" 
+					formControlName="password" 
+					placeholder="Password"[ngClass]="{'is-invalid': getFormControl('password').touched 
+                    && getFormControl('password').errors,
+                    'is-valid': getFormControl('password').valid }">
+              <div *ngIf="getFormControl('password').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Password
+              </div>
 				</div>
-				<button class="btn btn-primary btn-block login-button" type="submit"><i class="fa fa-user-plus"></i> Registro</button>
+				<button class="btn btn-primary btn-block login-button" type="submit" [disabled]="formRegister.invalid"><i class="fa fa-user-plus"></i> Registro</button>
 				<div class="checkbox login-options">
 					<a routerLink="/log-in" class="login-forgot">Inicio de sección</a>
 				</div>		

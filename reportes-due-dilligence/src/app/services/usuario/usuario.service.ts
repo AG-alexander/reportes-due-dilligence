@@ -4,6 +4,7 @@ import { DataStorageService } from "../dataStore/data-store.service";
 import { Usuario } from "../../models/modelos";
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class UsuarioService {
   constructor(
     private dataStorage: DataStorageService, 
     private angularFirestore: AngularFirestore,  
-    private location: Location
+    private location: Location,
+    private router: Router,
   ) { }
 
   getusuarios(): Observable<Usuario[]> {
@@ -47,7 +49,8 @@ export class UsuarioService {
       //this.blockUI.stop();
 
         //this.alertas.successInfoAlert("Actualización exitosa");
-        this.location.back();
+        //this.location.back();
+        this.router.navigate(["log-in"]);
       }).catch(()=>{
       //this.blockUI.stop();
 

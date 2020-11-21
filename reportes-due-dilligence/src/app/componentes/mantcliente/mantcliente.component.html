@@ -1,106 +1,140 @@
 <block-ui>
-    <app-sidebar></app-sidebar>
     <div style="margin-left: 20px; margin-right: 20px;">
         <h1>{{titulo}}</h1>
-            <form action="" [formGroup]="formCliente" (ngSubmit)="saveCliente()">
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" formControlName="nombre" id="nombre">
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" formControlName="email" id="email">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <label for="tipo">Tipo de persona</label>
-                        <select class="form-control" formControlName="tipo" id="tipo">
-                            <option value="Persona Fisica">Persona Fisica</option>
-                            <option value="Persona Juridica">Persona Juridica
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="identificacion">Identificacion</label>
-                        <input type="text" class="form-control" formControlName="identificacion" id="identificacion">
+        <form action="" [formGroup]="formCliente" (ngSubmit)="saveCliente()">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" 
+                    class="form-control" 
+                    formControlName="nombre" 
+                    id="nombre" 
+                    [ngClass]="{'is-invalid': getFormControl('nombre').touched 
+                               && getFormControl('nombre').errors,
+                               'is-valid': getFormControl('nombre').valid }">
+                    <div *ngIf="getFormControl('nombre').errors?.required"
+                        class=" form-control-feedback text-danger invalid-feedback">
+                        * El Nombre del cliente es requerido
                     </div>
                 </div>
-                <div class="person-information-container">
-                    <label>Contacto</label>
-                    <a (click)="open(contactModal)"  
-                         class="fa fa fa-plus"
-                         ngbPopover="Agregar contacto" 
-                         triggers="mouseenter:mouseleave" 
-                         style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
-                    <div>
-                        <ul class="list-group" *ngIf="!getFormControl('contactos').errors">
-                            <li class="list-group-item d-flex justify-content-between"
-                                *ngFor="let contacto of getFormControl('contactos').value; let index = index">
-                                {{contacto.contacto}}
-                                <div>
-                                    <a  (click)="setEditContact(index, contactModal)"  
-                                    class="fa fa-pencil-square-o"
-                                    data-toggle="modal"
-                                    data-target="#contactModal" 
-                                    ngbPopover="Editar" 
-                                    triggers="mouseenter:mouseleave"  
-                                    style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;" ></a>
-    
-                                    <a  (click)="deleteContact(index)"
-                                    class="fa fa-trash-o"
-                                    ngbPopover="Eliminar" 
-                                    triggers="mouseenter:mouseleave"  
-                                    style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;" ></a>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="col-sm-6">
+                    <label for="email">Email</label>
+                    <input type="email" 
+                    class="form-control" 
+                    formControlName="email" 
+                    id="email"
+                    [ngClass]="{'is-invalid': getFormControl('email').touched 
+                    && getFormControl('email').errors,
+                    'is-valid': getFormControl('email').valid }">
+                    <div *ngIf="getFormControl('email').errors?.required"
+                        class=" form-control-feedback text-danger invalid-feedback">
+                        * El email del cliente es requerido
                     </div>
-                    <div *ngIf="getFormControl('contactos').errors">
-                        <div *ngIf="!getFormControl('contactos').errors.validateList">
-                            <p class="invalid-feedback">Faltan Contacton</p>
-                        </div>
+                    <div *ngIf="getFormControl('email').errors?.email"
+                        class=" form-control-feedback text-danger invalid-feedback">
+                        * El Email del cliente no cuenta con el formato requerido
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" [disabled]="formCliente.invalid"
-                                    data-dismiss="modal">Guardar</button>
-            </form>
-    
-    
-    
-    
-    <!-- // Ventana modal         -->
-            <ng-template #contactModal let-modal>
-                <div class="modal-header">
-                    <h5 class="modal-title">Mantenimiento de Contacto</h5>
-                    
-                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <form action="" class="form" [formGroup]="formContacto" (ngSubmit)="saveContact(modal)">
-                          <div class="form-group">
-                              <input type="text" class="form-control" formControlName="contactoDescription" [ngClass]="{
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="tipo">Tipo de persona</label>
+                    <select class="form-control" 
+                    formControlName="tipo" 
+                    id="tipo"
+                    [ngClass]="{'is-invalid': getFormControl('tipo').touched 
+                    && getFormControl('tipo').errors,
+                    'is-valid': getFormControl('tipo').valid }">
+                        <option value="Persona Fisica">Persona Fisica</option>
+                        <option value="Persona Juridica">Persona Juridica
+                        </option>
+                    </select>
+                    <div *ngIf="getFormControl('tipo').errors?.required"
+                        class=" form-control-feedback text-danger invalid-feedback">
+                        * El Tipo de cliente es requerido
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="identificacion">Identificacion</label>
+                    <input type="text" 
+                    class="form-control" 
+                    formControlName="identificacion" 
+                    id="identificacion"
+                    [ngClass]="{'is-invalid': getFormControl('identificacion').touched 
+                    && getFormControl('identificacion').errors,
+                    'is-valid': getFormControl('identificacion').valid }">
+                    <div *ngIf="getFormControl('identificacion').errors?.required"
+                        class=" form-control-feedback text-danger invalid-feedback">
+                        * La Identificaciòn del cliente es requerido
+                    </div>
+                </div>
+            </div>
+            <div class="person-information-container">
+                <label>Contacto</label>
+                <a (click)="open(contactModal)" class="fa fa fa-plus" ngbPopover="Agregar contacto"
+                    triggers="mouseenter:mouseleave"
+                    style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;"></a>
+                    <div *ngIf="!getFormControl('contactos').errors.listValidator"
+                        class="form-control-feedback text-danger">
+                        * Se requiere al menos un contacto en el cliente
+                    </div>
+                <div>
+                    <ul class="list-group" *ngIf="!getFormControl('contactos').errors">
+                        <li class="list-group-item d-flex justify-content-between"
+                            *ngFor="let contacto of getFormControl('contactos').value; let index = index">
+                            {{contacto.contacto}}
+                            <div>
+                                <a (click)="setEditContact(index, contactModal)" class="fa fa-pencil-square-o"
+                                    data-toggle="modal" data-target="#contactModal" ngbPopover="Editar"
+                                    triggers="mouseenter:mouseleave"
+                                    style="font-size: 32px; color: red; cursor: pointer; padding-left:10px;"></a>
+
+                                <a (click)="deleteContact(index)" class="fa fa-trash-o" ngbPopover="Eliminar"
+                                    triggers="mouseenter:mouseleave"
+                                    style="font-size: 32px; color:  red; cursor: pointer; padding-left:10px;"></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="getFormControl('contactos').errors">
+                    <div *ngIf="!getFormControl('contactos').errors.validateList">
+                        <p class="invalid-feedback">Faltan Contactos</p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="formCliente.invalid"
+                data-dismiss="modal">Guardar</button>
+        </form>
+
+
+
+
+        <!-- // Ventana modal         -->
+        <ng-template #contactModal let-modal>
+            <div class="modal-header">
+                <h5 class="modal-title">Mantenimiento de Contacto</h5>
+
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form" [formGroup]="formContacto" (ngSubmit)="saveContact(modal)">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="contactoDescription" [ngClass]="{
                                   'is-invalid':getContactoControl('contactoDescription').invalid,
                                   'is-valid':getContactoControl('contactoDescription').valid}">
-                              <div class="invalid-feedback" *ngIf="getContactoControl('contactoDescription').invalid">
-                                  Contacto requerido
-                              </div>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="submit" class="btn btn-primary" [disabled]="formContacto.invalid"
-                                  data-dismiss="modal">Guardar</button>
-                          </div>
-                      </form>
-                  </div>
-              </ng-template>
+                        <div class="invalid-feedback" *ngIf="getContactoControl('contactoDescription').invalid">
+                            Contacto requerido
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" [disabled]="formContacto.invalid"
+                            data-dismiss="modal">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
         <!-- </div> -->
     </div>
 </block-ui>
-
-
-
-
-
