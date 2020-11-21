@@ -1,24 +1,52 @@
-<div class="container">
-    <div>
-        <h2>Estudio Ambiental</h2>
+<block-ui>
+    <app-sidebar></app-sidebar>
+    <div style="margin-left: 20px; margin-right: 20px;">
+        <h1>Estudio Ambiental</h1>
         <form action="" [formGroup]="formAmbiental" (ngSubmit)="saveAmbiental()">
             <div class="form-group">
                 <label for="especieAnimal">Especies animales protegidas en el àrea</label>
-                <textarea class="form-control" formControlName="especieAnimal" id="especieAnimal"></textarea>
+                <textarea class="form-control" 
+                          formControlName="especieAnimal" 
+                          id="especieAnimal"
+                          [ngClass]="{'is-invalid': getFormControl('especieAnimal').touched 
+                               && getFormControl('especieAnimal').errors,
+                               'is-valid': getFormControl('especieAnimal').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('especieAnimal').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle de especies animales es requerido
+                </div>  
             </div>
             <div class="form-group">
                 <label for="especieVegetal">Especies vegetales protegidas en el àrea</label>
-                <textarea class="form-control" formControlName="especieVegetal" id="especieVegetal"></textarea>
+                <textarea class="form-control" 
+                          formControlName="especieVegetal" 
+                          id="especieVegetal"
+                          [ngClass]="{'is-invalid': getFormControl('especieVegetal').touched 
+                               && getFormControl('especieVegetal').errors,
+                               'is-valid': getFormControl('especieVegetal').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('especieVegetal').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle de especies vegetales es requerido
+                </div>  
             </div>
             <div class="form-group">
                 <label for="obserLimitrofes">Observaciones limitrofes de la propiedad</label>
-                <textarea class="form-control" formControlName="obserLimitrofes" id="obserLimitrofes"></textarea>
+                <textarea class="form-control" 
+                          formControlName="obserLimitrofes" 
+                          id="obserLimitrofes"
+                          [ngClass]="{'is-invalid': getFormControl('obserLimitrofes').touched 
+                               && getFormControl('obserLimitrofes').errors,
+                               'is-valid': getFormControl('obserLimitrofes').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('obserLimitrofes').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle de especies vegetales es requerido
+                </div> 
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
-                <label for="estado" class="form-check-label">Estado del estudio</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input form-control"  id="estado" formControlName="estado">
+                <label class="custom-control-label" for="estado" >Estado del estudio</label>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="formAmbiental.invalid">Guardar</button>
         </form>
     </div>
-</div>
+</block-ui>

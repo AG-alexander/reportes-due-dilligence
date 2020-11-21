@@ -64,10 +64,11 @@ export class TopograficoComponent implements OnInit {
           if (t.id == "ntWqBtVEnI3qZHkOYhym") {
             if (t["estudio"]) {
               this.fillForm(t["estudio"]);
-              this.blockUI.stop();
+              
             }
           }
         });
+        this.blockUI.stop();
       }
     );
   }
