@@ -51,7 +51,7 @@ export class MantclienteComponent implements OnInit {
       nombre: ['', Validators.required],
       tipo: ['', Validators.required],
       identificacion: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       contactos: [[], [Validators.required, listValidator]]
     });
   }

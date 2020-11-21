@@ -52,11 +52,11 @@ export class MantinvestigacionComponent implements OnInit {
 
   initForm() {
     this.formInvest = this.fB.group({
-      nombre: [''],
+      nombre: ['', Validators.required],
       observaciones: [''],
-      tipoLocacion:[''],
-      direccionPropiedad:[''],
-      tamanno:[0]
+      tipoLocacion:['', Validators.required],
+      direccionPropiedad:['', Validators.required],
+      tamanno:[0, Validators.required]
     });
   }
 

@@ -32,32 +32,87 @@
                 placeholder="Introducir cedula" 
                 aria-describedby="button-addon2" 
                 disabled>
+              <div *ngIf="!cliente"
+                class=" form-control-feedback text-danger">
+                * El cliente es requerido
+              </div>
           </div>
       </div>
       <form [formGroup]="formInvest" (ngSubmit)="guardarInvestigacion()">
           <div class="form-group row">
             <div class="col-sm-6">
               <label for="nombre" >Nombre</label>
-              <input type="text" formControlName="nombre" class="form-control" id="nombre">
+              <input type="text" 
+              formControlName="nombre" 
+              class="form-control" 
+              id="nombre"
+              [ngClass]="{'is-invalid': getFormControl('nombre').touched 
+                    && getFormControl('nombre').errors,
+                    'is-valid': getFormControl('nombre').valid }">
+              <div *ngIf="getFormControl('nombre').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Nombre de la investigaciòn es requerida
+              </div>
             </div>
             <div class="col-sm-6">
               <label for="tipoLocacion" >Tipo de locacion</label>
-              <input type="text" formControlName="tipoLocacion" class="form-control" id="tipoLocacion">
+              <input type="text" 
+              formControlName="tipoLocacion" 
+              class="form-control" 
+              id="tipoLocacion"
+              [ngClass]="{'is-invalid': getFormControl('tipoLocacion').touched 
+                    && getFormControl('tipoLocacion').errors,
+                    'is-valid': getFormControl('tipoLocacion').valid }">
+              <div *ngIf="getFormControl('tipoLocacion').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Tipo de locaciòn de la investigaciòn es requerida
+              </div>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-11">
               <label for="direccionPropiedad" >Direccion de la propiedad</label>
-              <input type="text" formControlName="direccionPropiedad" class="form-control" id="direccionPropiedad">
+              <input type="text" 
+              formControlName="direccionPropiedad" 
+              class="form-control" 
+              id="direccionPropiedad"
+              [ngClass]="{'is-invalid': getFormControl('direccionPropiedad').touched 
+                    && getFormControl('direccionPropiedad').errors,
+                    'is-valid': getFormControl('direccionPropiedad').valid }">
+              <div *ngIf="getFormControl('direccionPropiedad').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * La Direcciòn de la propiedad es requerida
+              </div>
             </div>
             <div class="col-sm-1">
               <label for="tamanno" >Tamaño</label>
-              <input type="number" formControlName="tamanno" class="form-control" id="tamanno">
+              <input type="number" 
+              formControlName="tamanno" 
+              class="form-control" 
+              id="tamanno"
+              [ngClass]="{'is-invalid': getFormControl('tamanno').touched 
+                    && getFormControl('tamanno').errors,
+                    'is-valid': getFormControl('tamanno').valid }">
+              <div *ngIf="getFormControl('tamanno').errors?.required"
+                  class=" form-control-feedback text-danger invalid-feedback">
+                  * El Tamaño de la propiedad es requerida
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <label for="observaciones">observaciones</label>
-            <input type="text" formControlName="observaciones" class="form-control" id="observaciones" placeholder="observaciones">
+            <label for="observaciones">Observaciones</label>
+            <input type="text" 
+            formControlName="observaciones" 
+            class="form-control" 
+            id="observaciones" 
+            placeholder="observaciones"
+            [ngClass]="{'is-invalid': getFormControl('observaciones').touched 
+                    && getFormControl('observaciones').errors,
+                    'is-valid': getFormControl('observaciones').valid }">
+                <div *ngIf="getFormControl('observaciones').errors?.required"
+                    class=" form-control-feedback text-danger invalid-feedback">
+                    * La Observaciòn de la propiedad es requerida
+                </div>
           </div> 
           <div class="form-group">
               <div class="row">
@@ -72,7 +127,7 @@
                       </div>
               </div>
           </div>
-          <button type="submit" class="btn btn-primary">Enviar Cambios</button>
+          <button type="submit" class="btn btn-primary" [disabled]="formInvest.invalid || !cliente">Enviar Cambios</button>
         </form>
   </div>
 </block-ui>

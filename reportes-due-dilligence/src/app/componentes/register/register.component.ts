@@ -40,13 +40,7 @@ export class RegisterComponent implements OnInit {
       this.emailFormControl.value,
       this.passwordFormControl.value
       ).then((res)=>{
-        let usuario: Usuario;
-        usuario = {
-          id: "0",
-          email: this.emailFormControl.value,
-          admin: false
-        }
-        this.usuService.saveusuario(usuario);
+        
         }).catch((err)=>{
         
         });
@@ -54,6 +48,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  getFormControl(tipe:string) {
+    return this.formRegister.controls[tipe];
   }
 
 }

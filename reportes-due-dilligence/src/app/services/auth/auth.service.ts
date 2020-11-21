@@ -73,8 +73,13 @@ export class AuthService {
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
-        console.log("registr[o!");
-        this.router.navigate(["log-in"]);
+        let usuario: Usuario;
+        usuario = {
+          id: "0",
+          email: email,
+          admin: false
+        }
+        this.useService.saveusuario(usuario);
       }).catch((error) => {
         window.alert(error.message)
       })

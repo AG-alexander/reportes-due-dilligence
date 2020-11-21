@@ -44,4 +44,8 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
+  getFormControl(tipe:string) {
+    return this.formLogin.controls[tipe];
+  }
+
 }
