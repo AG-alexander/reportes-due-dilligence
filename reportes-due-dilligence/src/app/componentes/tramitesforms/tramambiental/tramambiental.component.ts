@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { InvestigacionService } from 'src/app/services/services';
 import { Investigacioin } from 'src/app/models/modelos';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
   selector: 'app-tramambiental',
@@ -10,7 +11,7 @@ import { Investigacioin } from 'src/app/models/modelos';
   styleUrls: ['./tramambiental.component.css']
 })
 export class TramambientalComponent implements OnInit {
-
+  @BlockUI() blockUI: NgBlockUI;
   formAmbiental: FormGroup;
   idinvest: string;
   investigacion: Investigacioin;
@@ -27,7 +28,9 @@ export class TramambientalComponent implements OnInit {
       estado: [false, Validators.required],
     });
   }
-
+  getFormControl(form:string){
+    return this.formAmbiental.controls[form];
+  }
   saveAmbiental() {
     this.investigacion.tramites.forEach(t => {
       if (t.id == "1CAqbOBTL9lK00Xp2WYK") {
@@ -47,6 +50,7 @@ export class TramambientalComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.idinvest = this.activatedRouete.snapshot.params['id'];
+    this.blockUI.start("Cargando Datos");
     this.invService.getinvestigacioinById(this.idinvest).subscribe(
       res => {
         this.investigacion = res[0];
@@ -57,7 +61,7 @@ export class TramambientalComponent implements OnInit {
             }
           }
         });
-        
+        this.blockUI.stop();
       }
     );
   }

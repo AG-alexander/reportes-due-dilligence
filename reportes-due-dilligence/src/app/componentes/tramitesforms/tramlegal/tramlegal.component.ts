@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Investigacioin, Tramite } from 'src/app/models/modelos';
 import { InvestigacionService } from 'src/app/services/services';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 @Component({
   selector: 'app-tramlegal',
   templateUrl: './tramlegal.component.html',
   styleUrls: ['./tramlegal.component.css']
 })
 export class TramlegalComponent implements OnInit {
+  @BlockUI() blockUI: NgBlockUI;
   idinvest: string;
   formLegal: FormGroup;
   investigacion: Investigacioin;
@@ -25,6 +26,10 @@ export class TramlegalComponent implements OnInit {
       demandas: ['', Validators.required],
       estado: [false, Validators.required],
     });
+  }
+
+  getFormControl(form:string){
+    return this.formLegal.controls[form];
   }
 
   fillForm(data) {
@@ -44,6 +49,7 @@ export class TramlegalComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.idinvest = this.activatedRouete.snapshot.params['id'];
+    this.blockUI.start("Cargando Datos");
     this.invService.getinvestigacioinById(this.idinvest).subscribe(
       res => {
         this.investigacion = res[0];
@@ -54,7 +60,7 @@ export class TramlegalComponent implements OnInit {
             }
           }
         });
-        
+        this.blockUI.stop();
       }
     );
   }

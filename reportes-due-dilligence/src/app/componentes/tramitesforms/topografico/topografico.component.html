@@ -1,4 +1,5 @@
 <block-ui>
+    <app-sidebar></app-sidebar>
     <div style="margin-left: 20px; margin-right: 20px;">
         <h1>Estudio Topografico</h1>
         <form action="" [formGroup]="formTopografico" (ngSubmit)="saveTopografico()">
@@ -47,7 +48,8 @@
                 <input type="text" 
                        class="form-control" 
                        formControlName="coordenadas" 
-                       id="coordenadas"[ngClass]="{'is-invalid': getFormControl('coordenadas').touched 
+                       id="coordenadas"
+                       [ngClass]="{'is-invalid': getFormControl('coordenadas').touched 
                        && getFormControl('coordenadas').errors,
                        'is-valid': getFormControl('coordenadas').valid }">
                 <div *ngIf="getFormControl('coordenadas').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
@@ -62,10 +64,3 @@
         </form>
     </div>
 </block-ui>
-
-<div class="container">
-    <div>
-        
-        
-    </div>
-</div>

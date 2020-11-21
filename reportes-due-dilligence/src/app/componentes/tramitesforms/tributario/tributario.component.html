@@ -1,24 +1,52 @@
-<div class="container">
-    <div>
-        <h2>Estudio Tributario</h2>
+<block-ui>
+    <app-sidebar></app-sidebar>
+    <div style="margin-left: 20px; margin-right: 20px;">
+        <h1>Estudio Tributario</h1>
         <form action="" [formGroup]="formTributario" (ngSubmit)="saveTributario()">
             <div class="form-group">
                 <label for="deuda">Deudas</label>
-                <textarea class="form-control" formControlName="deuda" id="deuda"></textarea>
+                <textarea class="form-control" 
+                          formControlName="deuda" 
+                          id="deuda"
+                          [ngClass]="{'is-invalid': getFormControl('deuda').touched 
+                          && getFormControl('deuda').errors,
+                          'is-valid': getFormControl('deuda').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('deuda').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle de deudas es requerido
+                </div>  
             </div>
             <div class="form-group">
                 <label for="impuestos">Evasion de impuestos</label>
-                <textarea class="form-control" formControlName="impuestos" id="impuestos"></textarea>
+                <textarea class="form-control" 
+                          formControlName="impuestos" 
+                          id="impuestos"
+                          [ngClass]="{'is-invalid': getFormControl('impuestos').touched 
+                          && getFormControl('impuestos').errors,
+                          'is-valid': getFormControl('impuestos').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('impuestos').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle impuestos es requerido
+                </div>
             </div>
             <div class="form-group">
                 <label for="hipotecas">Hipotecas</label>
-                <textarea class="form-control" formControlName="hipotecas" id="hipotecas"></textarea>
+                <textarea class="form-control" 
+                formControlName="hipotecas" 
+                id="hipotecas"
+                [ngClass]="{'is-invalid': getFormControl('hipotecas').touched 
+                          && getFormControl('hipotecas').errors,
+                          'is-valid': getFormControl('hipotecas').valid }">
+                </textarea>
+                <div *ngIf="getFormControl('hipotecas').errors?.required" class=" form-control-feedback text-danger invalid-feedback">
+                    * El Detalle hipotecas es requerido
+                </div>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" formControlName="estado" id="estado">
-                <label for="estado" class="form-check-label">Estado del estudio</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input form-control"  id="estado" formControlName="estado">
+                <label class="custom-control-label" for="estado" >Estado del estudio</label>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="formTributario.invalid">Guardar</button>
         </form>
     </div>
-</div>
+</block-ui>
