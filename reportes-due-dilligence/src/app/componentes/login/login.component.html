@@ -1,11 +1,21 @@
-<p>login works!</p>
-<form action="" (ngSubmit)="doSingIn()" [formGroup]="formLogin">
-    <div>
-        <input type="text" formControlName="email">
-    </div>
-    <div>
-        <input type="password" formControlName="password">
-    </div>
-
-    <button type="submit">Login</button>
-</form>
+<div class="container login-form">
+	<div class="panel panel-default">
+		<div class="panel-body">
+            <h2 class="login-title">Inicio de sección</h2>
+			<form action="" (ngSubmit)="doSingIn()" [formGroup]="formLogin">
+				<div class="input-group login-userinput">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+					<input id="txtUser" type="text" class="form-control" formControlName="email" placeholder="algo@algo.com">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+					<input  id="txtPassword" type="password" class="form-control" formControlName="password" placeholder="Password">
+				</div>
+				<button class="btn btn-primary btn-block login-button" type="submit"><i class="fa fa-sign-in"></i> Entrar</button>
+				<div class="checkbox login-options">
+					<a routerLink="/sing-up" class="login-forgot">Registrar nuevo usuario</a>
+				</div>		
+			</form>			
+		</div>
+	</div>
+</div>

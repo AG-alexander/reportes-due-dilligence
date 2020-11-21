@@ -1,79 +1,80 @@
-<app-sidebar></app-sidebar>
-
-<div style="margin-left: 20px; margin-right: 20px;">
-    <h1>{{titulo}}</h1>
-    <div class="row">
-        <div class="form-group col-sm-6">
-            <label for="cedulaClientes">Cedula</label>
-            <div id="cedulaCliente" class="row">
-              <div class="col-sm-11">
-                <input 
-                [(ngModel)]="cedulaClientes" 
+<block-ui>
+  <div style="margin-left: 20px; margin-right: 20px;">
+      <h1>{{titulo}}</h1>
+      <div class="row">
+          <div class="form-group col-sm-6">
+              <label for="cedulaClientes">Cedula</label>
+              <div id="cedulaCliente" class="row">
+                <div class="col-sm-11">
+                  <input 
+                  [(ngModel)]="cedulaClientes" 
+                  type="text" 
+                  class="form-control" 
+                  placeholder="Introducir cedula">
+                </div>
+                <div class="col-sm-1">
+                  <a (click)="buscarCliente()" 
+                       class="fa fa-search"
+                       ngbPopover="Buscar" 
+                       triggers="mouseenter:mouseleave" 
+                       style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
+                </div>
+                
+              </div>
+          </div>
+          <div class="form-group col-sm-6">
+              <label for="nombreCliente">Cliente</label>
+              <input 
+                id="nombreCliente" 
+                [(ngModel)]="nombreClientes" 
                 type="text" 
                 class="form-control" 
-                placeholder="Introducir cedula">
-              </div>
-              <div class="col-sm-1">
-                <a (click)="buscarCliente()" 
-                     class="fa fa-search"
-                     ngbPopover="Buscar" 
-                     triggers="mouseenter:mouseleave" 
-                     style="font-size: 32px; color: blue; cursor: pointer; padding-left:10px;" ></a>
-              </div>
-              
+                placeholder="Introducir cedula" 
+                aria-describedby="button-addon2" 
+                disabled>
+          </div>
+      </div>
+      <form [formGroup]="formInvest" (ngSubmit)="guardarInvestigacion()">
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label for="nombre" >Nombre</label>
+              <input type="text" formControlName="nombre" class="form-control" id="nombre">
             </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="nombreCliente">Cliente</label>
-            <input 
-              id="nombreCliente" 
-              [(ngModel)]="nombreClientes" 
-              type="text" 
-              class="form-control" 
-              placeholder="Introducir cedula" 
-              aria-describedby="button-addon2" 
-              disabled>
-        </div>
-    </div>
-    <form [formGroup]="formInvest" (ngSubmit)="guardarInvestigacion()">
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <label for="nombre" >Nombre</label>
-            <input type="text" formControlName="nombre" class="form-control" id="nombre">
-          </div>
-          <div class="col-sm-6">
-            <label for="tipoLocacion" >Tipo de locacion</label>
-            <input type="text" formControlName="tipoLocacion" class="form-control" id="tipoLocacion">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-11">
-            <label for="direccionPropiedad" >Direccion de la propiedad</label>
-            <input type="text" formControlName="direccionPropiedad" class="form-control" id="direccionPropiedad">
-          </div>
-          <div class="col-sm-1">
-            <label for="tamanno" >Tamaño</label>
-            <input type="number" formControlName="tamanno" class="form-control" id="tamanno">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="observaciones">observaciones</label>
-          <input type="text" formControlName="observaciones" class="form-control" id="observaciones" placeholder="observaciones">
-        </div> 
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Seleccion de Tramites</h2>
-                </div>
-                <div class="form-check col-md-4" *ngFor="let tram of listaTramites;let i = index;" >
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input form-control" [checked]="tram.estado" id="switch{{i}}" (click)="onChange($event, tram.id)">
-                            <label class="custom-control-label" for="switch{{i}}" >{{tram.nombre}} - {{tram.costo}} Colones</label>
-                        </div>
-                    </div>
+            <div class="col-sm-6">
+              <label for="tipoLocacion" >Tipo de locacion</label>
+              <input type="text" formControlName="tipoLocacion" class="form-control" id="tipoLocacion">
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar Cambios</button>
-      </form>
-</div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-11">
+              <label for="direccionPropiedad" >Direccion de la propiedad</label>
+              <input type="text" formControlName="direccionPropiedad" class="form-control" id="direccionPropiedad">
+            </div>
+            <div class="col-sm-1">
+              <label for="tamanno" >Tamaño</label>
+              <input type="number" formControlName="tamanno" class="form-control" id="tamanno">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="observaciones">observaciones</label>
+            <input type="text" formControlName="observaciones" class="form-control" id="observaciones" placeholder="observaciones">
+          </div> 
+          <div class="form-group">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h2>Seleccion de Tramites</h2>
+                  </div>
+                  <div class="form-check col-md-4" *ngFor="let tram of listaTramites;let i = index;" >
+                          <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input form-control" [checked]="tram.estado" id="switch{{i}}" (click)="onChange($event, tram.id)">
+                              <label class="custom-control-label" for="switch{{i}}" >{{tram.nombre}} - {{tram.costo}} Colones</label>
+                          </div>
+                      </div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar Cambios</button>
+        </form>
+  </div>
+</block-ui>
+
 

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [NormalGuard] },
   { path: 'cliente', component: ClientesComponent, canActivate: [NormalGuard] },
   { path: 'mantcliente/:id', component: MantclienteComponent, canActivate: [NormalGuard] },
-  { path: 'tramite', component: TramitesComponent, canActivate: [NormalGuard, AdminGuard] },
+  { path: 'tramite', component: TramitesComponent, canActivate: [NormalGuard/*, AdminGuard*/ ]},
   { path: 'investigacion', component: InvestigacionComponent, canActivate: [NormalGuard] },
   { path: 'manttramite/:id', component: ManttramiteComponent, canActivate: [NormalGuard] },
   { path: 'mantinvestigacion/:id', component: MantinvestigacionComponent, canActivate: [NormalGuard] },

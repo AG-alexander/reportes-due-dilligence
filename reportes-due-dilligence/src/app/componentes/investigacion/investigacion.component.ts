@@ -19,7 +19,8 @@ export class InvestigacionComponent implements OnInit {
     private tramiteService: TramiteService,
     private router: Router,
     private investigacionService:InvestigacionService,
-    private pdfService: PdfService ){ }
+    private pdfService: PdfService,
+    private alert: AlertService ){ }
 
   ngOnInit(): void {
     this.getlistTramites()
@@ -30,6 +31,7 @@ export class InvestigacionComponent implements OnInit {
     this.tramiteService.getTramites().subscribe(
       res => {
         this.listaTramites = res;
+        this.blockUI.stop();
         this.fiillist()
       }
     );
@@ -58,24 +60,20 @@ export class InvestigacionComponent implements OnInit {
     this.blockUI.start("Generando Datos");
     this.investigacionService.getinvestigacioinById(id).subscribe(
       res => {
-        console.log(1);
         this.pdfService.generatePDF(res).subscribe(
           res => {
+            this.blockUI.stop()
+            this.alert.AlertToastMessage('Pdf generado correctamente','success')
             console.log(res);
           },
           err => {
+            this.blockUI.stop()
+            this.alert.AlertaCenterMessage('Ocurrio un error a la hora de generar el pdf','error')
             console.log(err);
           }
         );
+        this.blockUI.stop()
       });
   }
-  // getTotal(){
-  //   for (let inves of this.listaInvest) {
-  //     for (let i of inves.tramites) {
-  //       inves.Total += i.costo 
-  //     }
-  //     console.log(inves) 
-  //   }
-  // }
 
 }
